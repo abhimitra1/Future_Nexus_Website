@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Institute of Future Nexus — Centurion University</title>
+  <meta name="description" content="Institute of Future Nexus at Centurion University — Pioneering XR Development, Industrial Design, and Blockchain Development for the leaders of tomorrow." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <link rel="icon" type="image/png" href="assets/images/logo-dark.png" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════
+       NAVBAR
+       ═══════════════════════════════════════════════ -->
+  <nav id="navbar">
+    <a class="nav-logo" href="#hero">
+      <img src="assets/images/logo-light.png" alt="Institute of Future Nexus" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#programs">XR Development</a></li>
+      <li><a href="#programs">Industrial Design</a></li>
+      <li><a href="#programs">Blockchain Dev</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#team">Team</a></li>
+    </ul>
+    <a class="nav-cta" href="#about">Apply Now</a>
+    <div class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- Side labels -->
+  <span class="side-label left">Institute of Future Nexus</span>
+  <span class="side-label right">Centurion University</span>
+
+  <!-- Side social icons -->
+  <div class="side-socials">
+    <a href="#" aria-label="Twitter / X">
+      <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/company/cu-ifn/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="#" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="blobs" aria-hidden="true">
+      <div class="blob blob-cyan-lg"></div>
+      <div class="blob blob-blue-lg"></div>
+      <div class="blob blob-magenta"></div>
+      <div class="blob blob-cyan-sm"></div>
+      <div class="blob blob-gold"></div>
+    </div>
+
+    <canvas id="hero-canvas"></canvas>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow"> Institute of Future Nexus  &mdash; Centurion University </p>
+      <h1 class="hero-title">Shape<br/>Tomorrow's<br/>Reality</h1>
+      <p class="hero-subtitle">
+        Where immersive technology, visionary design, and decentralised systems converge
+        to forge the builders of the next era.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#domains">
+          Explore Domains
+          <svg viewBox="0 0 24 24" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a class="btn-outline" href="#about">Learn More</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════════════════════
+       STATS
+       ═══════════════════════════════════════════════ -->
+  <section id="stats" class="section">
+    <div class="blobs" aria-hidden="true">
+      <div class="blob blob-section-1" style="top:-100px;right:-80px;"></div>
+      <div class="blob blob-section-2" style="bottom:-80px;left:-60px;"></div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-number" data-target="3" data-suffix="">3</div>
+        <div class="stat-label">Flagship Domains</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-number" data-target="500" data-suffix="+">500+</div>
+        <div class="stat-label">Students Enrolled</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-number" data-target="40" data-suffix="+">40+</div>
+        <div class="stat-label">Industry Partners</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-number" data-target="98" data-suffix="%">98%</div>
+        <div class="stat-label">Placement Rate</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════════════════════
+       DOMAINS
+       ═══════════════════════════════════════════════ -->
+  <section id="domains" class="section">
+    <div class="blobs" aria-hidden="true">
+      <div class="blob blob-purple" style="top:-80px;left:-100px;width:450px;height:450px;"></div>
+      <div class="blob blob-cyan-sm" style="bottom:-60px;right:-60px;"></div>
+    </div>
+    <div class="section-inner">
+
+      <div class="domains-header">
+        <div>
+          <p class="section-label">Our Domains</p>
+          <h2 class="reveal">Three Pillars of<br/>the Future</h2>
+        </div>
+        <p class="reveal reveal-delay-1">
+          Each domain is a complete ecosystem — combining rigorous curriculum,
+          cutting-edge labs, and industry mentorship.
+        </p>
+      </div>
+
+      <div class="domains-grid">
+
+        <!-- XR -->
+        <div class="domain-card xr">
+          <canvas class="domain-canvas-wrap" id="mini-canvas-xr"></canvas>
+          <p class="domain-number">01 / 03</p>
+          <div class="domain-icon-wrap">
+            <svg viewBox="0 0 24 24" stroke-width="1.5">
+              <path d="M2 9a2 2 0 012-2h16a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V9z"/>
+              <circle cx="8.5" cy="12" r="1.5"/><circle cx="15.5" cy="12" r="1.5"/>
+              <path d="M11 12h2"/>
+            </svg>
+          </div>
+          <h3>XR Development</h3>
+          <p>Craft immersive experiences across Virtual, Augmented and Mixed Reality. Build the spatial computing layer that will define human-computer interaction for the next decade.</p>
+          <div class="domain-tags">
+            <span class="tag">Unity / Unreal</span><span class="tag">WebXR</span>
+            <span class="tag">Spatial Design</span><span class="tag">Game Tech</span>
+          </div>
+          <div class="domain-tool-logos">
+            <img src="assets/images/logo-unity.svg" alt="Unity" title="Unity" />
+            <img src="assets/images/logo-unreal.svg" alt="Unreal Engine" title="Unreal Engine" />
+            <img src="assets/images/logo-maya.png" alt="Maya" class="logo-png" title="Autodesk Maya" />
+          </div>
+          <a class="domain-link" href="#programs">
+            Explore Curriculum
+            <svg viewBox="0 0 24 24" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <!-- Industrial Design -->
+        <div class="domain-card design">
+          <canvas class="domain-canvas-wrap" id="mini-canvas-design"></canvas>
+          <p class="domain-number">02 / 03</p>
+          <div class="domain-icon-wrap">
+            <svg viewBox="0 0 24 24" stroke-width="1.5">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+              <polyline points="2 17 12 22 22 17"/>
+              <polyline points="2 12 12 17 22 12"/>
+            </svg>
+          </div>
+          <h3>Industrial Design</h3>
+          <p>Merge aesthetic intuition with engineering rigour. Design products, systems and interfaces that are purposeful, beautiful, and built for real-world impact.</p>
+          <div class="domain-tags">
+            <span class="tag">Design Thinking</span><span class="tag">CAD / CAM</span>
+            <span class="tag">UX Research</span><span class="tag">Prototyping</span>
+          </div>
+          <div class="domain-tool-logos">
+            <img src="assets/images/logo-3dx.png" alt="3DEXPERIENCE" title="Dassault 3DEXPERIENCE" class="logo-png" />
+          </div>
+          <a class="domain-link" href="#programs">
+            Explore Curriculum
+            <svg viewBox="0 0 24 24" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <!-- Blockchain -->
+        <div class="domain-card blockchain">
+          <canvas class="domain-canvas-wrap" id="mini-canvas-blockchain"></canvas>
+          <p class="domain-number">03 / 03</p>
+          <div class="domain-icon-wrap">
+            <svg viewBox="0 0 24 24" stroke-width="1.5">
+              <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+              <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+            </svg>
+          </div>
+          <h3>Blockchain Development</h3>
+          <p>Engineer decentralised applications, smart contracts, and Web3 protocols. Understand cryptographic foundations and architect trustless systems that reshape finance, governance, and identity.</p>
+          <div class="domain-tags">
+            <span class="tag">Solidity</span><span class="tag">DeFi</span>
+            <span class="tag">Smart Contracts</span><span class="tag">Web3</span>
+          </div>
+          <div class="domain-tool-logos">
+            <img src="assets/images/logo-ethereum.svg" alt="Ethereum" title="Ethereum" />
+            <img src="assets/images/logo-hyperledger.svg" alt="Hyperledger" title="Hyperledger Fabric" />
+            <img src="assets/images/logo-solidity.svg" alt="Solidity" title="Solidity" />
+          </div>
+          <a class="domain-link" href="#programs">
+            Explore Curriculum
+            <svg viewBox="0 0 24 24" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════════════════════
+       PROGRAMS / CURRICULUM — compact 3-column
+       ═══════════════════════════════════════════════ -->
+  <section id="programs" class="section">
+    <div class="blobs" aria-hidden="true">
+      <div class="blob blob-section-1" style="top:-120px;left:-60px;"></div>
+      <div class="blob blob-section-2" style="bottom:-80px;right:-60px;"></div>
+    </div>
+    <div class="section-inner">
+      <p class="section-label">Curriculum</p>
+      <h2 class="reveal">What You Will Learn</h2>
+      <p class="reveal reveal-delay-1" style="max-width:620px; margin-top:1rem; margin-bottom:3.5rem;">
+        Three rigorous domains, each a complete ecosystem — deep curriculum, state-of-the-art labs, and real industry exposure from day one.
+      </p>
+
+      <div class="programs-grid">
+
+        <!-- XR Development -->
+        <div class="program-card xr reveal">
+          <div class="program-card-header">
+            <div class="program-icon xr">
+              <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor">
+                <path d="M2 9a2 2 0 012-2h16a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V9z"/>
+                <circle cx="8.5" cy="12" r="1.5"/><circle cx="15.5" cy="12" r="1.5"/>
+                <path d="M11 12h2"/>
+              </svg>
+            </div>
+            <div>
+              <p class="program-num">01 / 03</p>
+              <h3>XR Development</h3>
+            </div>
+          </div>
+          <p class="program-desc">Master the full XR stack — from 3D asset creation and spatial audio to multi-user networked experiences and enterprise deployment pipelines.</p>
+          <ul class="program-list">
+            <li>3D Mathematics &amp; Computer Graphics</li>
+            <li>Unity &amp; Unreal Engine for XR</li>
+            <li>WebXR — Browser-Native Experiences</li>
+            <li>Spatial UX Design &amp; Interaction</li>
+            <li>AR Development (ARCore, ARKit)</li>
+            <li>VR Performance &amp; Foveated Rendering</li>
+            <li>Mixed Reality (HoloLens, Meta Quest)</li>
+            <li>Multi-User XR Networking</li>
+            <li>Game Technology &amp; Simulation</li>
+            <li>Capstone: Industry XR Product Build</li>
+          </ul>
+          <div class="program-tags">
+            <span class="tag">Unity / Unreal</span>
+            <span class="tag">WebXR</span>
+            <span class="tag">Spatial Design</span>
+          </div>
+          <div class="program-tools">
+            <span class="tools-label">Tech Stack</span>
+            <div class="tool-logos">
+              <img src="assets/images/logo-unity.svg" alt="Unity" title="Unity" />
+              <img src="assets/images/logo-unreal.svg" alt="Unreal Engine" title="Unreal Engine" />
+              <img src="assets/images/logo-maya.png" alt="Autodesk Maya" class="logo-png" title="Autodesk Maya" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Industrial Design -->
+        <div class="program-card design reveal reveal-delay-1">
+          <div class="program-card-header">
+            <div class="program-icon design">
+              <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                <polyline points="2 17 12 22 22 17"/>
+                <polyline points="2 12 12 17 22 12"/>
+              </svg>
+            </div>
+            <div>
+              <p class="program-num">02 / 03</p>
+              <h3>Industrial Design</h3>
+            </div>
+          </div>
+          <p class="program-desc">Conceptualise, prototype, and deliver products that are functionally excellent and aesthetically compelling — from brief to final product.</p>
+          <ul class="program-list">
+            <li>Design Thinking &amp; Human-Centred Methods</li>
+            <li>Form &amp; Materiality — Sketching to 3D</li>
+            <li>CAD with SolidWorks, Fusion 360</li>
+            <li>Rapid Prototyping (FDM, SLA, CNC)</li>
+            <li>UX Research &amp; Usability Testing</li>
+            <li>Ergonomics &amp; Human Factors</li>
+            <li>Sustainable Design &amp; Lifecycle</li>
+            <li>Design for Manufacturing (DFM)</li>
+            <li>Brand Identity &amp; Design Communication</li>
+            <li>Capstone: End-to-End Product Sprint</li>
+          </ul>
+          <div class="program-tags">
+            <span class="tag">Design Thinking</span>
+            <span class="tag">CAD / CAM</span>
+            <span class="tag">UX Research</span>
+            <span class="tag">Prototyping</span>
+          </div>
+          <div class="program-tools">
+            <span class="tools-label">Tech Stack</span>
+            <div class="tool-logos">
+              <img src="assets/images/logo-3dx.png" alt="3DEXPERIENCE" title="Dassault 3DEXPERIENCE" class="logo-png" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Blockchain Development -->
+        <div class="program-card blockchain reveal reveal-delay-2">
+          <div class="program-card-header">
+            <div class="program-icon blockchain">
+              <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke="currentColor">
+                <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+                <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+              </svg>
+            </div>
+            <div>
+              <p class="program-num">03 / 03</p>
+              <h3>Blockchain Dev</h3>
+            </div>
+          </div>
+          <p class="program-desc">Go deep on cryptographic primitives, consensus mechanisms, and production-grade smart contract engineering for the decentralised economy.</p>
+          <ul class="program-list">
+            <li>Cryptography Foundations (Hash, PKI)</li>
+            <li>Blockchain Architecture &amp; DLT Theory</li>
+            <li>Ethereum, Solana &amp; Hyperledger</li>
+            <li>Solidity Smart Contract Development</li>
+            <li>DeFi Protocols — AMMs &amp; Lending</li>
+            <li>NFT Standards &amp; Token Economics</li>
+            <li>Smart Contract Security &amp; Audits</li>
+            <li>Layer 2 — Rollups &amp; State Channels</li>
+            <li>Cross-Chain Bridges &amp; Interoperability</li>
+            <li>Capstone: Deploy a Production DApp</li>
+          </ul>
+          <div class="program-tags">
+            <span class="tag">Solidity</span>
+            <span class="tag">DeFi</span>
+            <span class="tag">Web3</span>
+          </div>
+          <div class="program-tools">
+            <span class="tools-label">Tech Stack</span>
+            <div class="tool-logos">
+              <img src="assets/images/logo-ethereum.svg" alt="Ethereum" title="Ethereum" />
+              <img src="assets/images/logo-hyperledger.svg" alt="Hyperledger" title="Hyperledger Fabric" />
+              <img src="assets/images/logo-solidity.svg" alt="Solidity" title="Solidity" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════════════════════
+       FACILITIES
+       ═══════════════════════════════════════════════ -->
+  <section id="facilities" class="section">
+    <div class="blobs" aria-hidden="true">
+      <div class="blob blob-magenta" style="top:-60px;right:-80px;width:380px;height:380px;"></div>
+      <div class="blob blob-cyan-sm" style="bottom:-40px;left:-40px;width:300px;height:300px;"></div>
+    </div>
+    <div class="section-inner">
+      <p class="section-label">Infrastructure</p>
+      <h2 class="reveal">World-Class Facilities</h2>
+      <p class="reveal reveal-delay-1" style="max-width: 580px; margin-top: 1rem;">
+        Every lab is built to production standards — because practice on real tools
+        is the only preparation that matters.
+      </p>
+
+      <div class="facilities-grid">
+        <div class="facility-card reveal">
+          <div class="facility-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+          </div>
+          <h4>GTM XR Lab</h4>
+          <p>High-fidelity VR/AR development rigs with Meta Quest 3, HoloLens 2, and Varjo headsets.</p>
+        </div>
+        <div class="facility-card reveal reveal-delay-1">
+          <div class="facility-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h4>3D Fabrication Studio</h4>
+          <p>Multi-material FDM printers, SLA resin systems, laser cutters, and CNC milling workstations.</p>
+        </div>
+        <div class="facility-card reveal reveal-delay-2">
+          <div class="facility-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <h4>Blockchain Node Lab</h4>
+          <p>Private Ethereum and Hyperledger testnet infrastructure with real-time on-chain analytics dashboards.</p>
+        </div>
+        <div class="facility-card reveal">
+          <div class="facility-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h4>Innovation Hub</h4>
+          <p>Open collaboration space with high-speed internet, prototyping benches, and presentation theatres.</p>
+        </div>
+        <div class="facility-card reveal reveal-delay-1">
+          <div class="facility-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"/></svg>
+          </div>
+          <h4>Industry Mentorship</h4>
+          <p>Weekly sessions with practitioners from global tech firms, design studios, and Web3 protocols.</p>
+        </div>
+        <div class="facility-card reveal reveal-delay-2">
+          <div class="facility-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h4>Motion Capture Studio</h4>
+          <p>Professional OptiTrack Flex-13 mocap rig for character animation, biomechanics, and XR interaction research.</p>
+        </div>
+      </div>
+
+      <!-- Lab Photo Gallery -->
+      <div class="lab-gallery">
+        <p class="lab-gallery-eyebrow">Lab Walkthrough</p>
+        <div class="lab-gallery-grid">
+
+          <div class="lab-photo-card reveal">
+            <div class="lab-photo-wrap">
+              <img src="assets/images/Lab_Photos/XR%20Lab-Experience%20Zone.jpeg" alt="XR Lab — Experience Zone" loading="lazy" />
+              <div class="lab-photo-overlay">
+                <span class="lab-photo-tag xr-tag">XR Lab</span>
+                <span class="lab-photo-name">Experience Zone</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lab-photo-card reveal reveal-delay-1">
+            <div class="lab-photo-wrap">
+              <img src="assets/images/Lab_Photos/XR-Lab-Experience%20Zone.jpeg" alt="XR Lab — Experience Zone II" loading="lazy" />
+              <div class="lab-photo-overlay">
+                <span class="lab-photo-tag xr-tag">XR Lab</span>
+                <span class="lab-photo-name">Experience Zone II</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lab-photo-card reveal reveal-delay-2">
+            <div class="lab-photo-wrap">
+              <img src="assets/images/Lab_Photos/Industrial%20Design%20Lab.jpeg" alt="Industrial Design Lab" loading="lazy" />
+              <div class="lab-photo-overlay">
+                <span class="lab-photo-tag design-tag">Industrial Design</span>
+                <span class="lab-photo-name">Design Lab</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lab-photo-card reveal">
+            <div class="lab-photo-wrap">
+              <img src="assets/images/Lab_Photos/XR-Lab-Thinkers%20Area.jpeg" alt="XR Lab — Thinkers Area" loading="lazy" />
+              <div class="lab-photo-overlay">
+                <span class="lab-photo-tag xr-tag">XR Lab</span>
+                <span class="lab-photo-name">Thinkers Area</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lab-photo-card reveal reveal-delay-1">
+            <div class="lab-photo-wrap">
+              <img src="assets/images/Lab_Photos/XR-Lab-Development%20and%20Testing%20Lab.jpeg" alt="XR Lab — Development & Testing Lab" loading="lazy" />
+              <div class="lab-photo-overlay">
+                <span class="lab-photo-tag xr-tag">XR Lab</span>
+                <span class="lab-photo-name">Development & Testing Lab</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lab-photo-card reveal reveal-delay-2">
+            <div class="lab-photo-wrap">
+              <img src="assets/images/Lab_Photos/XR-Lab-Development%20and%20Testing%20Area.jpeg" alt="XR Lab — Development & Testing Area" loading="lazy" />
+              <div class="lab-photo-overlay">
+                <span class="lab-photo-tag xr-tag">XR Lab</span>
+                <span class="lab-photo-name">Development & Testing Area</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- /Lab Photo Gallery -->
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════════════════════
+       TEAM
+       ═══════════════════════════════════════════════ -->
+  <section id="team" class="section">
+    <div class="blobs" aria-hidden="true">
+      <div class="blob blob-cyan-sm" style="top:-80px;left:-60px;width:360px;height:360px;"></div>
+      <div class="blob blob-magenta" style="bottom:-60px;right:-80px;width:380px;height:380px;"></div>
+    </div>
+    <div class="section-inner">
+      <p class="section-label">Faculty &amp; Instructors</p>
+      <h2 class="reveal">Our Team</h2>
+      <p class="reveal reveal-delay-1" style="max-width:580px;margin-top:1rem;">
+        Practitioners and researchers bringing real industry depth to every classroom and lab.
+      </p>
+
+      <!-- Leadership -->
+      <div class="team-leadership">
+        <div class="team-lead-card reveal">
+          <div class="team-avatar av-edge-ai">SJ</div>
+          <div class="team-lead-info">
+            <h3>Dr. Swarnaprabha Jena</h3>
+            <p class="team-role">Associate Dean, SoCDS &amp; IFN</p>
+            <div class="team-tags">
+              <span class="team-tag tag-edge-ai">Edge AI</span>
+            </div>
+          </div>
+        </div>
+        <div class="team-lead-card reveal reveal-delay-1">
+          <div class="team-avatar av-xr">AM</div>
+          <div class="team-lead-info">
+            <h3>Abhi Mitra</h3>
+            <p class="team-role">Subject Matter Expert</p>
+            <div class="team-tags">
+              <span class="team-tag tag-xr">XR</span>
+              <span class="team-tag tag-blockchain">Blockchain</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Instructors -->
+      <div class="team-section-label reveal">Instructors</div>
+      <div class="team-grid">
+
+        <!-- ── XR Development ── -->
+        <div class="team-domain-group">
+          <span class="team-domain-group-label tg-xr">XR Development</span>
+          <span class="team-domain-group-line"></span>
+        </div>
+
+        <div class="team-card reveal">
+          <div class="team-avatar av-xr">RM</div>
+          <p class="team-name">Rajendra Maharana</p>
+          <p class="team-role">XR Development</p>
+          <div class="team-tags"><span class="team-tag tag-xr">XR</span></div>
+        </div>
+
+        <div class="team-card reveal reveal-delay-1">
+          <div class="team-avatar av-xr">BP</div>
+          <p class="team-name">Banjita Priyadarshini</p>
+          <p class="team-role">3D Game Art</p>
+          <div class="team-tags"><span class="team-tag tag-xr">XR</span></div>
+        </div>
+
+        <div class="team-card reveal reveal-delay-2">
+          <div class="team-avatar av-xr">AT</div>
+          <p class="team-name">Ashish Tudu</p>
+          <p class="team-role">XR Development &amp; ESports</p>
+          <div class="team-tags">
+            <span class="team-tag tag-xr">XR</span>
+            <span class="team-campus">Paralakhemundi</span>
+          </div>
+        </div>
+
+        <div class="team-card reveal reveal-delay-3">
+          <div class="team-avatar av-xr">MA</div>
+          <p class="team-name">Md. Akif</p>
+          <p class="team-role">XR Development &amp; ESports</p>
+          <div class="team-tags">
+            <span class="team-tag tag-xr">XR</span>
+            <span class="team-campus">Vizianagaram</span>
+          </div>
+        </div>
+
+        <!-- ── Industrial Design ── -->
+        <div class="team-domain-group">
+          <span class="team-domain-group-label tg-design">Industrial Design</span>
+          <span class="team-domain-group-line"></span>
+        </div>
+
+        <div class="team-card reveal">
+          <div class="team-avatar av-design">LR</div>
+          <p class="team-name">Laxmidhar Reddy</p>
+          <p class="team-role">Industrial Design Engineer</p>
+          <div class="team-tags"><span class="team-tag tag-design">Industrial Design</span></div>
+        </div>
+
+        <div class="team-card reveal reveal-delay-1">
+          <div class="team-avatar av-design">AS</div>
+          <p class="team-name">Avinash Singh</p>
+          <p class="team-role">Industrial Design Engineer</p>
+          <div class="team-tags"><span class="team-tag tag-design">Industrial Design</span></div>
+        </div>
+
+        <div class="team-card reveal reveal-delay-2">
+          <div class="team-avatar av-design">SR</div>
+          <p class="team-name">Shiva Reddy</p>
+          <p class="team-role">Industrial Design Engineer</p>
+          <div class="team-tags"><span class="team-tag tag-design">Industrial Design</span></div>
+        </div>
+
+        <div class="team-card reveal reveal-delay-3">
+          <div class="team-avatar av-design">RO</div>
+          <p class="team-name">Rajanikant Ojha</p>
+          <p class="team-role">Jr. Industrial Design Engineer</p>
+          <div class="team-tags"><span class="team-tag tag-design">Industrial Design</span></div>
+        </div>
+
+        <div class="team-card reveal">
+          <div class="team-avatar av-bim">SG</div>
+          <p class="team-name">Suhaila Ghulami</p>
+          <p class="team-role">Building Information Modelling</p>
+          <div class="team-tags"><span class="team-tag tag-bim">BIM</span></div>
+        </div>
+
+        <!-- ── Blockchain Development ── -->
+        <div class="team-domain-group">
+          <span class="team-domain-group-label tg-blockchain">Blockchain Development</span>
+          <span class="team-domain-group-line"></span>
+        </div>
+
+        <div class="team-card reveal">
+          <div class="team-avatar av-blockchain">SS</div>
+          <p class="team-name">Sunny Singh</p>
+          <p class="team-role">Blockchain Development</p>
+          <div class="team-tags"><span class="team-tag tag-blockchain">Blockchain</span></div>
+        </div>
+
+        <!-- ── Drone Development ── -->
+        <div class="team-domain-group">
+          <span class="team-domain-group-label tg-drone">Drone Development</span>
+          <span class="team-domain-group-line"></span>
+        </div>
+
+        <div class="team-card reveal">
+          <div class="team-avatar av-drone">SD</div>
+          <p class="team-name">Saneev Kumar Das</p>
+          <p class="team-role">Drone Development</p>
+          <div class="team-tags"><span class="team-tag tag-drone">Drone</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════════════════════
+       ABOUT  (mission, vision + integrated contact)
+       ═══════════════════════════════════════════════ -->
+  <section id="about" class="section">
+    <canvas id="about-canvas"></canvas>
+
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-visual reveal">
+          <div class="about-image-frame">
+            <img src="assets/images/about.png" alt="Institute of Future Nexus" />
+          </div>
+          <div class="about-badge">
+            <span class="badge-num">IFN</span>
+            <span class="badge-text">Est. 2019</span>
+          </div>
+        </div>
+
+        <div class="about-content">
+          <p class="section-label">About the Institute</p>
+          <h2 class="reveal">Building the Architects<br/>of Tomorrow</h2>
+          <p class="lead reveal reveal-delay-1">
+            The Institute of Future Nexus (IFN) at Centurion University is a pioneering centre
+            for applied technology education, purposefully designed to sit at the intersection
+            of the physical, virtual, and decentralised worlds.
+          </p>
+          <p class="reveal reveal-delay-2">
+            We believe that the next generation of innovators must be fluent in multiple
+            technological languages simultaneously. Our integrated programmes combine
+            rigorous academic foundations with hands-on industry exposure, so graduates
+            enter the workforce as architects — not just practitioners — of emerging technology.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/images/logo-light.png" alt="Institute of Future Nexus" />
+          <p>
+            Shaping Lives. Empowering Communities.<br/>
+            A flagship institute of Centurion University, Odisha.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h5>Domains</h5>
+          <ul>
+            <li><a href="#programs">XR Development</a></li>
+            <li><a href="#programs">Industrial Design</a></li>
+            <li><a href="#programs">Blockchain Dev</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Institute</h5>
+          <ul>
+            <li><a href="#about">About IFN</a></li>
+            <li><a href="#about">Mission &amp; Vision</a></li>
+            <li><a href="#facilities">Facilities</a></li>
+            <li><a href="#team">Our Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="#">Twitter / X</a></li>
+            <li><a href="https://www.linkedin.com/company/cu-ifn/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="mailto:ifn@cutm.ac.in">ifn@cutm.ac.in</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Institute of Future Nexus, Centurion University. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── MINI DOMAIN CANVASES (decorative) ─────────── -->
+  <script>
+  (function() {
+    const configs = [
+      { id: 'mini-canvas-xr',         color: 0x22d3ee, sec: 0x7c3aed },
+      { id: 'mini-canvas-design',     color: 0xe040fb, sec: 0xa855f7 },
+      { id: 'mini-canvas-blockchain', color: 0xf59e0b, sec: 0x7c3aed },
+    ];
+
+    configs.forEach(({ id, color, sec }) => {
+      const canvas = document.getElementById(id);
+      if (!canvas || !window.THREE) return;
+      const W = 140, H = 140;
+      canvas.width = W; canvas.height = H;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(W, H);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+      camera.position.z = 3.2;
+
+      scene.add(new THREE.AmbientLight(0x060c1f, 3));
+      const pl1 = new THREE.PointLight(color, 8, 12); pl1.position.set(2, 2, 2); scene.add(pl1);
+      const pl2 = new THREE.PointLight(sec,   3, 12); pl2.position.set(-2,-1, 1); scene.add(pl2);
+
+      const geo = new THREE.IcosahedronGeometry(0.82, 1);
+      const mat = new THREE.MeshPhongMaterial({
+        color: 0x060c1f,
+        emissive: 0x030008,
+        specular: color,
+        shininess: 120,
+      });
+      const mesh = new THREE.Mesh(geo, mat);
+      scene.add(mesh);
+
+      const wmat = new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity: 0.35 });
+      const wire = new THREE.Mesh(geo.clone(), wmat);
+      scene.add(wire);
+
+      let t = 0;
+      (function loop() {
+        requestAnimationFrame(loop);
+        t += 0.007;
+        mesh.rotation.x += 0.01;
+        mesh.rotation.y += 0.015;
+        wire.rotation.x -= 0.007;
+        wire.rotation.y -= 0.01;
+        pl1.position.x = 2 + Math.sin(t) * 0.8;
+        pl1.position.y = 2 + Math.cos(t * 0.6) * 0.8;
+        renderer.render(scene, camera);
+      })();
+    });
+  })();
+  </script>
+
+  <!-- Main JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
