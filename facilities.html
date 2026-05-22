@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Facilities &amp; Labs — School of Future Nexus, Centurion University</title>
+  <meta name="description" content="World-class research infrastructure at IFN — the GTM XR Lab, Industrial Design Studio, Blockchain Node Lab, and more. Every lab built to production standards." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" type="image/png" href="assets/images/logo-dark.png" />
+  <style>
+    /* ── Facilities page specific ── */
+
+    /* Lab tabs */
+    .lab-tabs {
+      display: flex; gap: 0; margin-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+    }
+    .lab-tab {
+      background: none; border: none; border-bottom: 2px solid transparent;
+      color: var(--grey); font-family: 'Manrope', sans-serif;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em;
+      padding: 0.85rem 1.4rem; cursor: pointer; white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+      margin-bottom: -1px;
+    }
+    .lab-tab:hover { color: rgba(255,255,255,0.7); }
+    .lab-tab.active { color: #fff; border-bottom-color: var(--blue); }
+
+    .lab-panel { display: none; }
+    .lab-panel.active { display: block; }
+
+    /* Lab hero card */
+    .lab-hero-card {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; border-radius: 20px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 3rem; min-height: 420px;
+    }
+    .lab-hero-image {
+      position: relative; overflow: hidden;
+    }
+    .lab-hero-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .lab-hero-card:hover .lab-hero-image img { transform: scale(1.04); }
+    .lab-hero-image-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(7,12,23,0.3), rgba(7,12,23,0.05));
+    }
+    .lab-hero-body {
+      background: rgba(255,255,255,0.025);
+      padding: 3rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .lab-hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 0.8rem;
+    }
+    .lab-hero-body h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 900; margin-bottom: 1rem; line-height: 1.15;
+    }
+    .lab-hero-body p {
+      font-size: 0.9rem; line-height: 1.85;
+      color: rgba(255,255,255,0.62); margin-bottom: 1.5rem;
+    }
+    .lab-hero-stats {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .lab-stat {
+      text-align: left;
+    }
+    .lab-stat-num {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.5rem; font-weight: 900;
+      background: linear-gradient(135deg, #fff, #60a5fa);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1; margin-bottom: 0.2rem;
+    }
+    .lab-stat-label {
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    /* Lab zones */
+    .lab-zones-heading {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--grey); margin-bottom: 1.25rem;
+    }
+    .lab-zones-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .lab-zone-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px; padding: 1.5rem;
+      transition: border-color 0.2s, background 0.2s, transform 0.25s;
+    }
+    .lab-zone-card:hover {
+      background: rgba(37,99,235,0.05);
+      border-color: rgba(37,99,235,0.2);
+      transform: translateY(-2px);
+    }
+    .lab-zone-icon {
+      width: 38px; height: 38px;
+      background: rgba(37,99,235,0.08);
+      border: 1px solid rgba(37,99,235,0.18);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .lab-zone-icon svg { width: 18px; height: 18px; stroke: #60a5fa; }
+    .lab-zone-card h4 {
+      font-size: 0.92rem; font-weight: 700;
+      margin-bottom: 0.5rem; line-height: 1.3;
+    }
+    .lab-zone-card p {
+      font-size: 0.78rem; line-height: 1.75;
+      color: var(--grey); margin: 0;
+    }
+
+    /* Equipment list */
+    .lab-equipment {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px; padding: 2rem;
+      margin-bottom: 1rem;
+    }
+    .lab-equipment-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--grey); margin-bottom: 1.2rem;
+    }
+    .equipment-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem 2rem;
+    }
+    .equipment-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.82rem; color: rgba(255,255,255,0.65);
+      padding: 0.3rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .equipment-item::before {
+      content: ''; width: 5px; height: 5px;
+      border-radius: 50%; background: var(--blue);
+      flex-shrink: 0; opacity: 0.7;
+    }
+
+    /* Photo strip */
+    .lab-photos-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .lab-photo-strip-card {
+      border-radius: 12px; overflow: hidden;
+      aspect-ratio: 4/3; position: relative;
+    }
+    .lab-photo-strip-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; transition: transform 0.5s ease;
+    }
+    .lab-photo-strip-card:hover img { transform: scale(1.06); }
+    .lab-photo-strip-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(7,12,23,0.7) 0%, transparent 50%);
+      display: flex; align-items: flex-end; padding: 1rem;
+    }
+    .lab-photo-strip-label {
+      font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.85);
+      letter-spacing: 0.04em;
+    }
+
+    /* Overview grid (all labs) */
+    .all-labs-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    }
+    .all-lab-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px; padding: 2rem;
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      transition: border-color 0.25s, background 0.25s, transform 0.25s;
+      cursor: default;
+    }
+    .all-lab-card:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.13);
+      transform: translateY(-2px);
+    }
+    .all-lab-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: rgba(37,99,235,0.08);
+      border: 1px solid rgba(37,99,235,0.18);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .all-lab-icon svg { width: 22px; height: 22px; stroke: #60a5fa; }
+    .all-lab-body h4 { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .all-lab-body p { font-size: 0.82rem; line-height: 1.8; color: var(--grey); margin: 0; }
+    .all-lab-tag {
+      display: inline-block; margin-top: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--blue); background: rgba(37,99,235,0.08);
+      border: 1px solid rgba(37,99,235,0.15);
+      border-radius: 20px; padding: 0.22rem 0.7rem;
+    }
+
+    @media (max-width: 900px) {
+      .lab-hero-card { grid-template-columns: 1fr; }
+      .lab-hero-image { aspect-ratio: 16/7; }
+      .lab-zones-grid { grid-template-columns: 1fr 1fr; }
+      .all-labs-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .lab-hero-body { padding: 2rem; }
+      .lab-zones-grid { grid-template-columns: 1fr; }
+      .lab-photos-strip { grid-template-columns: 1fr 1fr; }
+      .equipment-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html">
+      <img src="assets/images/logo-light.png" alt="School of Future Nexus" />
+    </a>
+    <ul class="nav-links">
+      <li class="has-dropdown">
+        <a href="index.html#domains">Research <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="domain-xr.html">XR Development</a></li>
+          <li><a href="domain-industrial.html">Industrial Design</a></li>
+          <li><a href="domain-blockchain.html">Blockchain Development</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="index.html#programs">Education &amp; Training <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="domain-xr.html">XR Curriculum</a></li>
+          <li><a href="domain-industrial.html">Industrial Design Curriculum</a></li>
+          <li><a href="domain-blockchain.html">Blockchain Curriculum</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="startups.html">Startups &amp; Community <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="https://thegttech.com/" target="_blank" rel="noopener">GramTarang Technologies</a></li>
+          <li><a href="https://superbeeaeronautics.com/" target="_blank" rel="noopener">SuperBee Aeronautics</a></li>
+          <li><a href="https://apexdevs.io/" target="_blank" rel="noopener">ApexDevs</a></li>
+          <li><a href="https://www.arcenpay.com/" target="_blank" rel="noopener">ArcenPay</a></li>
+          <li><a href="http://campustocrypto.com/" target="_blank" rel="noopener">Campus to Crypto</a></li>
+          <li><a href="https://sowsaathi.com/" target="_blank" rel="noopener">SowSaathi</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="about.html" class="nav-active">About Us <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="about.html">About IFN</a></li>
+          <li><a href="facilities.html">Facilities &amp; Labs</a></li>
+          <li><a href="index.html#team">Our Team</a></li>
+          <li><a href="index.html#about">Apply Now</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></div>
+  </nav>
+
+  <span class="side-label left">School of Future Nexus</span>
+  <span class="side-label right">Centurion University</span>
+
+  <section class="page-hero">
+    <div class="blobs" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+    </div>
+    <div class="page-hero-inner">
+      <p class="section-label">Infrastructure</p>
+      <h1>Where <em>Ideas</em> Become Real</h1>
+      <p class="page-hero-sub">
+        Every lab at IFN is built to production standards — the same tools, workflows, and
+        environments used in the industry. Students build on real hardware from day one,
+        because simulated environments produce simulated results.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Lab Overview Numbers ── -->
+  <section class="section" style="padding-top:0; padding-bottom:2rem;">
+    <div class="section-inner">
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;">
+        <div class="all-lab-card reveal" style="flex-direction:column; gap:0.5rem; padding:1.5rem;">
+          <div style="font-family:'Manrope',sans-serif;font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,#fff,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">4</div>
+          <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);">Specialist Labs</div>
+        </div>
+        <div class="all-lab-card reveal reveal-delay-1" style="flex-direction:column; gap:0.5rem; padding:1.5rem;">
+          <div style="font-family:'Manrope',sans-serif;font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,#fff,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">6+</div>
+          <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);">XR Headsets</div>
+        </div>
+        <div class="all-lab-card reveal reveal-delay-2" style="flex-direction:column; gap:0.5rem; padding:1.5rem;">
+          <div style="font-family:'Manrope',sans-serif;font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,#fff,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">24/7</div>
+          <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);">Testnet Uptime</div>
+        </div>
+        <div class="all-lab-card reveal reveal-delay-2" style="flex-direction:column; gap:0.5rem; padding:1.5rem;">
+          <div style="font-family:'Manrope',sans-serif;font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,#fff,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">3</div>
+          <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);">GTM XR Zones</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Detailed Lab Sections ── -->
+  <section class="section" style="padding-top:1rem;">
+    <div class="section-inner">
+
+      <div class="lab-tabs" role="tablist">
+        <button class="lab-tab active" role="tab" data-lab="gtm">GTM XR Lab</button>
+        <button class="lab-tab" role="tab" data-lab="design">Industrial Design Studio</button>
+        <button class="lab-tab" role="tab" data-lab="blockchain">Blockchain Lab</button>
+        <button class="lab-tab" role="tab" data-lab="all">All Facilities</button>
+      </div>
+
+      <!-- GTM XR LAB -->
+      <div class="lab-panel active" id="lab-gtm">
+
+        <div class="lab-hero-card">
+          <div class="lab-hero-image">
+            <img src="assets/images/Lab_Photos/XR%20Lab-Experience%20Zone.jpeg" alt="GTM XR Lab — Experience Zone" loading="lazy" />
+            <div class="lab-hero-image-overlay"></div>
+          </div>
+          <div class="lab-hero-body">
+            <p class="lab-hero-eyebrow">GTM XR Lab</p>
+            <h2>Odisha's Most Advanced<br/>XR Research Facility</h2>
+            <p>A full-spectrum Extended Reality complex spanning three dedicated zones — purpose-built for research, development, and immersive experience. The GTM XR Lab is where IFN's XR programme comes to life, giving students access to professional-grade hardware and software from their first semester.</p>
+            <div class="lab-hero-stats">
+              <div class="lab-stat">
+                <div class="lab-stat-num">3</div>
+                <div class="lab-stat-label">Dedicated Zones</div>
+              </div>
+              <div class="lab-stat">
+                <div class="lab-stat-num">6+</div>
+                <div class="lab-stat-label">XR Headsets</div>
+              </div>
+              <div class="lab-stat">
+                <div class="lab-stat-num">RTX</div>
+                <div class="lab-stat-label">Workstations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="lab-zones-heading">Lab Zones</p>
+        <div class="lab-zones-grid">
+          <div class="lab-zone-card reveal">
+            <div class="lab-zone-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M2 9a2 2 0 012-2h16a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V9z"/><circle cx="8.5" cy="12" r="1.5"/><circle cx="15.5" cy="12" r="1.5"/><path d="M11 12h2"/></svg>
+            </div>
+            <h4>Experience Zone</h4>
+            <p>A dedicated immersive showcase space equipped with Meta Quest 3, HoloLens 2, and Varjo headsets. Used for application demos, client walkthroughs, and user testing sessions with student-built XR applications.</p>
+          </div>
+          <div class="lab-zone-card reveal reveal-delay-1">
+            <div class="lab-zone-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"/></svg>
+            </div>
+            <h4>Thinkers Area</h4>
+            <p>An open ideation and collaboration studio — whiteboards, display walls, and flexible seating for concept mapping, storyboarding, and design critique. Where spatial problems are solved before a single line of code is written.</p>
+          </div>
+          <div class="lab-zone-card reveal reveal-delay-2">
+            <div class="lab-zone-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h4>Development &amp; Testing</h4>
+            <p>High-performance workstations with RTX GPUs running Unity and Unreal Engine. Device profiling rigs, performance benchmarking tools, and SDK integration environments for iterative XR development and testing.</p>
+          </div>
+        </div>
+
+        <div class="lab-equipment">
+          <div class="lab-equipment-label">Hardware &amp; Software</div>
+          <div class="equipment-grid">
+            <div class="equipment-item">Meta Quest 3 headsets</div>
+            <div class="equipment-item">Unity XR Interaction Toolkit</div>
+            <div class="equipment-item">Microsoft HoloLens 2</div>
+            <div class="equipment-item">Unreal Engine 5 (Lumen, Nanite)</div>
+            <div class="equipment-item">Varjo XR headsets</div>
+            <div class="equipment-item">Blender &amp; Autodesk Maya</div>
+            <div class="equipment-item">RTX-class development workstations</div>
+            <div class="equipment-item">OpenXR / WebXR SDK stack</div>
+            <div class="equipment-item">Motion capture reference rig</div>
+            <div class="equipment-item">Spatial audio monitoring system</div>
+          </div>
+        </div>
+
+        <p class="lab-zones-heading" style="margin-top:2rem;">Lab Walkthrough</p>
+        <div class="lab-photos-strip">
+          <div class="lab-photo-strip-card reveal">
+            <img src="assets/images/Lab_Photos/XR%20Lab-Experience%20Zone.jpeg" alt="Experience Zone" loading="lazy" />
+            <div class="lab-photo-strip-overlay"><span class="lab-photo-strip-label">Experience Zone</span></div>
+          </div>
+          <div class="lab-photo-strip-card reveal reveal-delay-1">
+            <img src="assets/images/Lab_Photos/XR-Lab-Thinkers%20Area.jpeg" alt="Thinkers Area" loading="lazy" />
+            <div class="lab-photo-strip-overlay"><span class="lab-photo-strip-label">Thinkers Area</span></div>
+          </div>
+          <div class="lab-photo-strip-card reveal reveal-delay-2">
+            <img src="assets/images/Lab_Photos/XR-Lab-Development%20and%20Testing%20Lab.jpeg" alt="Development &amp; Testing" loading="lazy" />
+            <div class="lab-photo-strip-overlay"><span class="lab-photo-strip-label">Development &amp; Testing</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- INDUSTRIAL DESIGN STUDIO -->
+      <div class="lab-panel" id="lab-design">
+
+        <div class="lab-hero-card">
+          <div class="lab-hero-image">
+            <img src="assets/images/Lab_Photos/Industrial%20Design%20Lab.jpeg" alt="Industrial Design Lab" loading="lazy" />
+            <div class="lab-hero-image-overlay"></div>
+          </div>
+          <div class="lab-hero-body">
+            <p class="lab-hero-eyebrow">Industrial Design Studio</p>
+            <h2>From Sketch to<br/>Manufactured Product</h2>
+            <p>A fully-equipped product design studio built for end-to-end workflows. Students move fluidly between concept sketching, parametric CAD, physical prototyping, and material finishing — all in one space, with access to the same tools used in industry design teams worldwide.</p>
+            <div class="lab-hero-stats">
+              <div class="lab-stat">
+                <div class="lab-stat-num">3DX</div>
+                <div class="lab-stat-label">Dassault Platform</div>
+              </div>
+              <div class="lab-stat">
+                <div class="lab-stat-num">FDM</div>
+                <div class="lab-stat-label">3D Printing</div>
+              </div>
+              <div class="lab-stat">
+                <div class="lab-stat-num">CNC</div>
+                <div class="lab-stat-label">Fabrication</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="lab-zones-heading">Studio Zones</p>
+        <div class="lab-zones-grid">
+          <div class="lab-zone-card reveal">
+            <div class="lab-zone-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <h4>Concept &amp; Sketch Studio</h4>
+            <p>Drafting tables, reference material libraries, and digital drawing tablets for early-stage concept ideation, form exploration, and design communication with stakeholders.</p>
+          </div>
+          <div class="lab-zone-card reveal reveal-delay-1">
+            <div class="lab-zone-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h4>CAD &amp; Digital Design</h4>
+            <p>SolidWorks, Catia, and the Dassault Systèmes 3DEXPERIENCE platform for parametric modelling, simulation, GD&amp;T, and cloud-based PLM collaboration.</p>
+          </div>
+          <div class="lab-zone-card reveal reveal-delay-2">
+            <div class="lab-zone-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M6 2v6l4 2-4 2v6l16-8L6 2z"/></svg>
+            </div>
+            <h4>Fabrication &amp; Finishing</h4>
+            <p>FDM and SLA 3D printers, CNC tooling, sheet metal bending equipment, and a hand-finishing area for sanding, painting, and surface treatments.</p>
+          </div>
+        </div>
+
+        <div class="lab-equipment">
+          <div class="lab-equipment-label">Tools &amp; Software</div>
+          <div class="equipment-grid">
+            <div class="equipment-item">Dassault 3DEXPERIENCE Platform</div>
+            <div class="equipment-item">SolidWorks 2024</div>
+            <div class="equipment-item">Catia V5 / V6</div>
+            <div class="equipment-item">FDM 3D printers (Ultimaker, Bambu)</div>
+            <div class="equipment-item">SLA / resin printing</div>
+            <div class="equipment-item">CNC milling machine</div>
+            <div class="equipment-item">Digital drawing tablets</div>
+            <div class="equipment-item">Material sample library</div>
+            <div class="equipment-item">Surface finishing station</div>
+            <div class="equipment-item">Photography / documentation rig</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BLOCKCHAIN LAB -->
+      <div class="lab-panel" id="lab-blockchain">
+
+        <div class="lab-hero-card">
+          <div class="lab-hero-image" style="background: rgba(7,12,23,0.9); display:flex; align-items:center; justify-content:center;">
+            <svg viewBox="0 0 200 200" style="width:220px; height:220px; opacity:0.12;" fill="none" stroke="#f59e0b" stroke-width="1">
+              <rect x="30" y="80" width="40" height="40" rx="4"/>
+              <rect x="130" y="80" width="40" height="40" rx="4"/>
+              <rect x="80" y="30" width="40" height="40" rx="4"/>
+              <rect x="80" y="130" width="40" height="40" rx="4"/>
+              <line x1="70" y1="100" x2="130" y2="100"/>
+              <line x1="100" y1="70" x2="100" y2="80"/>
+              <line x1="100" y1="130" x2="100" y2="130"/>
+              <line x1="70" y1="100" x2="80" y2="50"/>
+              <line x1="130" y1="100" x2="120" y2="50"/>
+            </svg>
+            <div class="lab-hero-image-overlay"></div>
+          </div>
+          <div class="lab-hero-body">
+            <p class="lab-hero-eyebrow">Blockchain Node Lab</p>
+            <h2>Live Testnets.<br/>Real Deployments.</h2>
+            <p>IFN's Blockchain Lab runs private Ethereum and Hyperledger testnet nodes 24/7, giving students a live environment to deploy smart contracts, run on-chain analytics, and test DeFi protocols — not simulations, but real blockchain infrastructure.</p>
+            <div class="lab-hero-stats">
+              <div class="lab-stat">
+                <div class="lab-stat-num">24/7</div>
+                <div class="lab-stat-label">Node Uptime</div>
+              </div>
+              <div class="lab-stat">
+                <div class="lab-stat-num">AVA</div>
+                <div class="lab-stat-label">Avalanche Verified</div>
+              </div>
+              <div class="lab-stat">
+                <div class="lab-stat-num">3+</div>
+                <div class="lab-stat-label">Active Chains</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="lab-zones-heading">Infrastructure</p>
+        <div class="lab-zones-grid">
+          <div class="lab-zone-card reveal">
+            <div class="lab-zone-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <h4>Testnet Node Cluster</h4>
+            <p>Private Ethereum (Hardhat/Foundry), Avalanche Fuji testnet, and Hyperledger Fabric nodes — always running, accessible to all enrolled students via secure key-pair authentication.</p>
+          </div>
+          <div class="lab-zone-card reveal reveal-delay-1">
+            <div class="lab-zone-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+            </div>
+            <h4>Protocol Dev Workstations</h4>
+            <p>Dedicated development machines with full Ethereum toolchain (Foundry, Hardhat, Ethers.js, Wagmi), smart contract auditing tools, and on-chain monitoring dashboards.</p>
+          </div>
+          <div class="lab-zone-card reveal reveal-delay-2">
+            <div class="lab-zone-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            </div>
+            <h4>Security Audit Station</h4>
+            <p>Isolated environment for smart contract security research — Slither, Mythril, and manual audit workflows. Students learn to identify and remediate vulnerabilities in production contract code.</p>
+          </div>
+        </div>
+
+        <div class="lab-equipment">
+          <div class="lab-equipment-label">Tech Stack</div>
+          <div class="equipment-grid">
+            <div class="equipment-item">Ethereum Hardhat &amp; Foundry</div>
+            <div class="equipment-item">Avalanche Fuji testnet nodes</div>
+            <div class="equipment-item">Hyperledger Fabric network</div>
+            <div class="equipment-item">Solidity development environment</div>
+            <div class="equipment-item">Ethers.js / Wagmi</div>
+            <div class="equipment-item">The Graph protocol indexer</div>
+            <div class="equipment-item">Slither &amp; Mythril (security)</div>
+            <div class="equipment-item">MetaMask institutional + Core wallet</div>
+            <div class="equipment-item">IPFS / Filecoin storage node</div>
+            <div class="equipment-item">On-chain analytics dashboard</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ALL FACILITIES -->
+      <div class="lab-panel" id="lab-all">
+        <div class="all-labs-grid">
+          <div class="all-lab-card reveal">
+            <div class="all-lab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M2 9a2 2 0 012-2h16a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V9z"/><circle cx="8.5" cy="12" r="1.5"/><circle cx="15.5" cy="12" r="1.5"/><path d="M11 12h2"/></svg>
+            </div>
+            <div class="all-lab-body">
+              <h4>GTM XR Lab</h4>
+              <p>Full-spectrum XR complex with three dedicated zones — Experience, Thinkers, and Development &amp; Testing. Meta Quest 3, HoloLens 2, Varjo, and RTX workstations.</p>
+              <span class="all-lab-tag">XR Development</span>
+            </div>
+          </div>
+          <div class="all-lab-card reveal reveal-delay-1">
+            <div class="all-lab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            </div>
+            <div class="all-lab-body">
+              <h4>Industrial Design Studio</h4>
+              <p>End-to-end product design studio with SolidWorks, Catia, Dassault 3DEXPERIENCE, FDM/SLA printing, CNC machining, and material finishing facilities.</p>
+              <span class="all-lab-tag">Industrial Design</span>
+            </div>
+          </div>
+          <div class="all-lab-card reveal">
+            <div class="all-lab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <div class="all-lab-body">
+              <h4>Blockchain Node Lab</h4>
+              <p>Private Ethereum, Avalanche Fuji, and Hyperledger testnet nodes running 24/7. Smart contract development, security auditing, and on-chain analytics infrastructure.</p>
+              <span class="all-lab-tag">Blockchain Dev</span>
+            </div>
+          </div>
+          <div class="all-lab-card reveal reveal-delay-1">
+            <div class="all-lab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="all-lab-body">
+              <h4>Common Research Space</h4>
+              <p>Cross-domain collaboration area with high-speed networking, projection displays, and flexible workspace for multi-disciplinary project teams and visiting researchers.</p>
+              <span class="all-lab-tag">Shared Infrastructure</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="lab-zones-heading" style="margin-top:3rem;">Photo Gallery</p>
+        <div class="lab-photos-strip">
+          <div class="lab-photo-strip-card reveal">
+            <img src="assets/images/Lab_Photos/XR%20Lab-Experience%20Zone.jpeg" alt="XR Lab Experience Zone" loading="lazy" />
+            <div class="lab-photo-strip-overlay"><span class="lab-photo-strip-label">XR — Experience Zone</span></div>
+          </div>
+          <div class="lab-photo-strip-card reveal reveal-delay-1">
+            <img src="assets/images/Lab_Photos/XR-Lab-Experience%20Zone.jpeg" alt="XR Lab Experience Zone II" loading="lazy" />
+            <div class="lab-photo-strip-overlay"><span class="lab-photo-strip-label">XR — Experience Zone II</span></div>
+          </div>
+          <div class="lab-photo-strip-card reveal reveal-delay-2">
+            <img src="assets/images/Lab_Photos/Industrial%20Design%20Lab.jpeg" alt="Industrial Design Lab" loading="lazy" />
+            <div class="lab-photo-strip-overlay"><span class="lab-photo-strip-label">Industrial Design Studio</span></div>
+          </div>
+          <div class="lab-photo-strip-card reveal">
+            <img src="assets/images/Lab_Photos/XR-Lab-Thinkers%20Area.jpeg" alt="XR Thinkers Area" loading="lazy" />
+            <div class="lab-photo-strip-overlay"><span class="lab-photo-strip-label">XR — Thinkers Area</span></div>
+          </div>
+          <div class="lab-photo-strip-card reveal reveal-delay-1">
+            <img src="assets/images/Lab_Photos/XR-Lab-Development%20and%20Testing%20Lab.jpeg" alt="XR Dev Lab" loading="lazy" />
+            <div class="lab-photo-strip-overlay"><span class="lab-photo-strip-label">XR — Dev &amp; Testing Lab</span></div>
+          </div>
+          <div class="lab-photo-strip-card reveal reveal-delay-2">
+            <img src="assets/images/Lab_Photos/XR-Lab-Development%20and%20Testing%20Area.jpeg" alt="XR Dev Area" loading="lazy" />
+            <div class="lab-photo-strip-overlay"><span class="lab-photo-strip-label">XR — Dev &amp; Testing Area</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="section-inner">
+      <div class="startup-cta-strip reveal">
+        <div>
+          <h3>See the labs in person.</h3>
+          <p>Schedule a campus visit or apply for the next cohort — spaces are limited.</p>
+        </div>
+        <a href="index.html#about" class="btn-primary">Apply Now</a>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/images/logo-light.png" alt="School of Future Nexus" />
+          <p>Shaping Lives. Empowering Communities.<br/>A flagship institute of Centurion University, Odisha.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Domains</h5>
+          <ul>
+            <li><a href="domain-xr.html">XR Development</a></li>
+            <li><a href="domain-industrial.html">Industrial Design</a></li>
+            <li><a href="domain-blockchain.html">Blockchain Dev</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Institute</h5>
+          <ul>
+            <li><a href="about.html">About IFN</a></li>
+            <li><a href="about.html">Mission &amp; Vision</a></li>
+            <li><a href="facilities.html">Facilities</a></li>
+            <li><a href="index.html#team">Our Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="#">Twitter / X</a></li>
+            <li><a href="https://www.linkedin.com/company/cu-ifn/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="mailto:ifn@cutm.ac.in">ifn@cutm.ac.in</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 School of Future Nexus, Centurion University. All rights reserved.</span>
+        <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.querySelectorAll('.lab-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.lab-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.lab-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('lab-' + tab.dataset.lab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

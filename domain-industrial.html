@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Industrial Design — School of Future Nexus</title>
+  <meta name="description" content="Industrial Design domain at IFN — GTM Lab v1.0. CATIA, SIMULIA, DYMOLA & ENOVIA on 3DExperience. 4 courses, 22 credits, GoToMarket in 100 Days." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" type="image/png" href="assets/images/logo-dark.png" />
+  <style>
+    :root { --domain-color: #e040fb; --domain-glow: rgba(224,64,251,0.15); }
+    .page-hero h1 em { font-style:normal; color: var(--domain-color); }
+    .domain-tab.active { border-bottom-color: var(--domain-color); }
+    .placeholder-panel .placeholder-icon { background: rgba(224,64,251,0.08); border-color: rgba(224,64,251,0.2); }
+    .placeholder-panel .placeholder-icon svg { stroke: rgba(224,64,251,0.7); }
+    .placeholder-tag { color: rgba(224,64,251,0.8); background: rgba(224,64,251,0.08); border-color: rgba(224,64,251,0.15); }
+
+    /* ── DS Badge ── */
+    .ds-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(0,83,134,0.12); border: 1px solid rgba(0,83,134,0.35);
+      border-radius: 8px; padding: 0.45rem 1rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 600;
+      color: #4db3e6; letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .ds-badge svg { width: 14px; height: 14px; stroke: #4db3e6; fill: none; stroke-width: 2; }
+
+    /* ── Programme Stats Bar ── */
+    .prog-stat-bar {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 1px; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.07); border-radius: 16px;
+      overflow: hidden; margin-bottom: 2rem;
+    }
+    .prog-stat {
+      padding: 1.4rem 0.75rem; background: rgba(255,255,255,0.02);
+      text-align: center; transition: background 0.2s;
+    }
+    .prog-stat:hover { background: rgba(224,64,251,0.05); }
+    .prog-stat-num {
+      display: block; font-family: 'JetBrains Mono', monospace;
+      font-size: 1.8rem; font-weight: 900; color: var(--domain-color);
+      line-height: 1; margin-bottom: 0.35rem;
+    }
+    .prog-stat-label {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--grey);
+    }
+
+    /* ── Credit Flow Bar ── */
+    .credit-flow-wrap { margin-bottom: 2rem; }
+    .credit-flow-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3);
+      margin-bottom: 0.5rem;
+    }
+    .credit-flow {
+      display: flex; align-items: stretch; border-radius: 10px; overflow: hidden;
+      height: 44px; border: 1px solid rgba(255,255,255,0.06);
+    }
+    .cs { display: flex; align-items: center; justify-content: center; flex-direction: column;
+      gap: 0.1rem; transition: opacity 0.2s; cursor: default; }
+    .cs:hover { opacity: 0.85; }
+    .cs-code { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; color: rgba(255,255,255,0.9); letter-spacing: 0.04em; }
+    .cs-cr { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; color: rgba(255,255,255,0.5); }
+    .cs-1 { width: calc(3/22*100%); background: rgba(156,39,176,0.3); }
+    .cs-2 { width: calc(8/22*100%); background: rgba(156,39,176,0.55); }
+    .cs-3 { width: calc(3/22*100%); background: rgba(224,64,251,0.45); }
+    .cs-4 { width: calc(8/22*100%); background: rgba(224,64,251,0.8); }
+    .credit-flow-legend {
+      display: flex; gap: 1.5rem; margin-top: 0.6rem; flex-wrap: wrap;
+    }
+    .cfl-item { display: flex; align-items: center; gap: 0.4rem; }
+    .cfl-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+    .cfl-dot.sem1 { background: rgba(156,39,176,0.7); }
+    .cfl-dot.sem2 { background: rgba(224,64,251,0.55); }
+    .cfl-dot.cap { background: rgba(224,64,251,0.9); }
+    .cfl-label { font-size: 0.65rem; color: var(--grey); letter-spacing: 0.04em; }
+
+    /* ── Platform Strip ── */
+    .platform-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin-bottom: 2.5rem;
+    }
+    .platform-card {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px; transition: border-color 0.2s, background 0.2s;
+    }
+    .platform-card:hover { background: rgba(224,64,251,0.04); border-color: rgba(224,64,251,0.2); }
+    .platform-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .platform-icon.catia  { background: rgba(0,83,134,0.18); border: 1px solid rgba(0,83,134,0.35); }
+    .platform-icon.sim    { background: rgba(56,178,91,0.15); border: 1px solid rgba(56,178,91,0.28); }
+    .platform-icon.enovia { background: rgba(224,64,251,0.12); border: 1px solid rgba(224,64,251,0.25); }
+    .platform-info {}
+    .platform-name { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; line-height: 1; display: block; }
+    .platform-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.35rem; }
+    .platform-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.57rem; font-weight: 600;
+      color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05);
+      border-radius: 4px; padding: 0.15rem 0.45rem; letter-spacing: 0.04em;
+    }
+
+    /* ── Teaching Principles ── */
+    .principles-section { margin-bottom: 2.5rem; }
+    .section-phase-header { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1.25rem; }
+    .section-phase-pill {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.63rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--domain-color); border: 1px solid rgba(224,64,251,0.35);
+      border-radius: 20px; padding: 0.3rem 0.85rem; white-space: nowrap;
+    }
+    .section-phase-rule { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent); }
+    .section-phase-meta {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+      color: rgba(255,255,255,0.22); letter-spacing: 0.06em; white-space: nowrap;
+    }
+    .principles-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;
+    }
+    .principle-card {
+      padding: 1rem 1.1rem;
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px; display: flex; gap: 0.75rem; align-items: flex-start;
+    }
+    .principle-icon {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: rgba(224,64,251,0.09); border: 1px solid rgba(224,64,251,0.18);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 0.05rem;
+    }
+    .principle-icon svg { width: 13px; height: 13px; stroke: var(--domain-color); fill: none; stroke-width: 2; }
+    .principle-text h5 {
+      font-size: 0.77rem; font-weight: 700; color: #fff;
+      margin: 0 0 0.2rem; line-height: 1.3;
+    }
+    .principle-text p { font-size: 0.68rem; color: var(--grey); line-height: 1.6; margin: 0; }
+
+    /* ── Curriculum Roadmap ── */
+    .curriculum-roadmap { display: flex; flex-direction: column; }
+    .roadmap-phase { margin-bottom: 2.5rem; }
+    .roadmap-phase-header { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1.25rem; }
+    .roadmap-phase-pill {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.63rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--domain-color); border: 1px solid rgba(224,64,251,0.35);
+      border-radius: 20px; padding: 0.3rem 0.85rem; white-space: nowrap;
+    }
+    .roadmap-phase-rule { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent); }
+    .roadmap-phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .roadmap-phase-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+    .roadmap-phase-grid.one-col  { grid-template-columns: 1fr; }
+
+    .course-card {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px; padding: 1.5rem; position: relative; overflow: hidden;
+      transition: border-color 0.25s, background 0.25s, transform 0.25s;
+    }
+    .course-card::before {
+      content: attr(data-num); position: absolute; top: -0.3rem; right: 1rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 4rem; font-weight: 900;
+      color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none; user-select: none;
+    }
+    .course-card:hover { background: rgba(224,64,251,0.04); border-color: rgba(224,64,251,0.28); transform: translateY(-2px); }
+    .course-card .course-code {
+      display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--domain-color); margin-bottom: 0.35rem;
+    }
+    .course-card .course-meta-row {
+      display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem;
+    }
+    .course-card h4 { font-size: 0.93rem; font-weight: 700; margin: 0; line-height: 1.3; color: #fff; }
+    .course-card .credit-chip {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; font-weight: 600;
+      color: rgba(224,64,251,0.6); background: rgba(224,64,251,0.08);
+      border: 1px solid rgba(224,64,251,0.15); border-radius: 5px;
+      padding: 0.15rem 0.45rem; white-space: nowrap; margin-left: auto;
+    }
+    .course-card .course-focus {
+      font-size: 0.7rem; color: rgba(255,255,255,0.35); margin: 0.35rem 0 0.5rem;
+      font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em;
+    }
+    .course-card p { font-size: 0.78rem; line-height: 1.75; color: var(--grey); margin: 0; }
+    .course-topics {
+      margin: 0.65rem 0 0; padding: 0; list-style: none;
+    }
+    .course-topics li {
+      font-size: 0.71rem; line-height: 1.65; color: var(--grey);
+      padding-left: 0.9rem; position: relative;
+    }
+    .course-topics li::before {
+      content: '›'; position: absolute; left: 0;
+      color: var(--domain-color); opacity: 0.55;
+    }
+    .course-prereq {
+      display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.57rem;
+      color: rgba(255,255,255,0.2); margin-top: 0.65rem; letter-spacing: 0.04em;
+    }
+
+    /* ── Connector ── */
+    .roadmap-connector { display: flex; align-items: center; gap: 0.8rem; margin: -0.5rem 0 2.5rem; padding: 0 0.5rem; opacity: 0.4; }
+    .roadmap-connector-line { flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+    .roadmap-connector svg { width: 14px; height: 14px; stroke: rgba(255,255,255,0.4); flex-shrink: 0; }
+
+    /* ── Semester Divider ── */
+    .semester-divider {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem;
+    }
+    .semester-divider-pill {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: #fff;
+      background: rgba(224,64,251,0.1); border: 1px solid rgba(224,64,251,0.25);
+      border-radius: 20px; padding: 0.35rem 1rem; white-space: nowrap;
+    }
+    .semester-divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.06); }
+    .semester-divider-meta {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+      color: rgba(255,255,255,0.2); letter-spacing: 0.06em; white-space: nowrap;
+    }
+
+    /* ── Capstone ── */
+    .roadmap-capstone {
+      background: rgba(224,64,251,0.05); border: 1px solid rgba(224,64,251,0.2);
+      border-radius: 18px; padding: 2rem 2.5rem;
+      display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start;
+      position: relative; overflow: hidden;
+    }
+    .roadmap-capstone::after {
+      content: 'IV'; position: absolute; right: 2rem; top: 50%; transform: translateY(-50%);
+      font-family: 'JetBrains Mono', monospace; font-size: 5rem; font-weight: 900;
+      color: rgba(224,64,251,0.05); line-height: 1; pointer-events: none;
+    }
+    .capstone-badge {
+      writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg);
+      font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--domain-color); opacity: 0.9; margin-top: 0.25rem;
+    }
+    .capstone-content .course-code {
+      display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--domain-color); margin-bottom: 0.5rem;
+    }
+    .capstone-content h3 { font-size: 1.3rem; font-weight: 800; margin: 0 0 0.4rem; line-height: 1.2; }
+    .capstone-content > p { font-size: 0.85rem; line-height: 1.8; color: var(--grey); margin: 0 0 1.25rem; }
+
+    /* ── Capstone Tracks ── */
+    .capstone-tracks-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.65rem;
+    }
+    .capstone-track {
+      padding: 1rem 0.85rem; text-align: center;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; transition: border-color 0.2s, background 0.2s;
+    }
+    .capstone-track:hover { background: rgba(224,64,251,0.06); border-color: rgba(224,64,251,0.28); }
+    .track-letter {
+      display: block; font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem; font-weight: 900; color: var(--domain-color);
+      opacity: 0.7; margin-bottom: 0.4rem; line-height: 1;
+    }
+    .track-name {
+      display: block; font-size: 0.72rem; font-weight: 700;
+      color: rgba(255,255,255,0.85); margin-bottom: 0.3rem; line-height: 1.3;
+    }
+    .track-detail {
+      font-size: 0.63rem; color: var(--grey); line-height: 1.5; margin: 0;
+    }
+
+    /* ── Career Strip ── */
+    .career-strip {
+      display: flex; gap: 0.55rem; flex-wrap: wrap;
+      padding: 1.5rem; margin-top: 2.5rem;
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 14px;
+    }
+    .career-strip-label {
+      width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+      font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.25); margin-bottom: 0.5rem;
+    }
+    .career-chip {
+      font-size: 0.73rem; font-weight: 600;
+      color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 0.32rem 0.85rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .career-chip:hover { color: var(--domain-color); border-color: rgba(224,64,251,0.3); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1100px) {
+      .principles-grid { grid-template-columns: repeat(2, 1fr); }
+      .capstone-tracks-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .prog-stat-bar { grid-template-columns: repeat(3, 1fr); }
+      .platform-strip { grid-template-columns: 1fr 1fr; }
+      .principles-grid { grid-template-columns: repeat(2, 1fr); }
+      .roadmap-phase-grid { grid-template-columns: 1fr 1fr; }
+      .roadmap-phase-grid.two-col { grid-template-columns: 1fr 1fr; }
+      .roadmap-phase-grid.one-col { grid-template-columns: 1fr; }
+      .capstone-tracks-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .prog-stat-bar { grid-template-columns: repeat(2, 1fr); }
+      .platform-strip { grid-template-columns: 1fr; }
+      .principles-grid { grid-template-columns: 1fr; }
+      .roadmap-phase-grid { grid-template-columns: 1fr; }
+      .roadmap-phase-grid.two-col { grid-template-columns: 1fr; }
+      .roadmap-phase-grid.one-col { grid-template-columns: 1fr; }
+      .roadmap-capstone { grid-template-columns: 1fr; }
+      .capstone-badge { writing-mode: horizontal-tb; transform: none; }
+      .capstone-tracks-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html">
+      <img src="assets/images/logo-light.png" alt="School of Future Nexus" />
+    </a>
+    <ul class="nav-links">
+      <li class="has-dropdown">
+        <a href="index.html#domains" class="nav-active">Research <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="domain-xr.html">XR Development</a></li>
+          <li><a href="domain-industrial.html">Industrial Design</a></li>
+          <li><a href="domain-blockchain.html">Blockchain Development</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="index.html#programs">Education &amp; Training <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="domain-xr.html">XR Curriculum</a></li>
+          <li><a href="domain-industrial.html">Industrial Design Curriculum</a></li>
+          <li><a href="domain-blockchain.html">Blockchain Curriculum</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="startups.html">Startups &amp; Community <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="https://thegttech.com/" target="_blank" rel="noopener">GramTarang Technologies</a></li>
+          <li><a href="https://superbeeaeronautics.com/" target="_blank" rel="noopener">SuperBee Aeronautics</a></li>
+          <li><a href="https://apexdevs.io/" target="_blank" rel="noopener">ApexDevs</a></li>
+          <li><a href="https://www.arcenpay.com/" target="_blank" rel="noopener">ArcenPay</a></li>
+          <li><a href="http://campustocrypto.com/" target="_blank" rel="noopener">Campus to Crypto</a></li>
+          <li><a href="https://sowsaathi.com/" target="_blank" rel="noopener">SowSaathi</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="index.html#about">About Us <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="index.html#about">About IFN</a></li>
+          <li><a href="index.html#facilities">Facilities &amp; Labs</a></li>
+          <li><a href="index.html#team">Our Team</a></li>
+          <li><a href="index.html#about">Apply Now</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></div>
+  </nav>
+
+  <span class="side-label left">School of Future Nexus</span>
+  <span class="side-label right">Centurion University</span>
+
+  <section class="page-hero">
+    <div class="blobs" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+    </div>
+    <div class="page-hero-inner">
+      <p class="section-label">Research Domain</p>
+      <div class="ds-badge">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        Dassault Systèmes CSI Partner Programme
+      </div>
+      <h1><em>Industrial</em> Design</h1>
+      <p class="page-hero-sub">
+        Odisha's first Dassault Systèmes CSI-Partner lab at Centurion University. Go from design brief to digital product launch in 100 days — engineering EVs, drones, robots, and autonomous machines on CATIA, SIMULIA, DYMOLA, and ENOVIA on the 3DExperience Platform.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="section-inner">
+
+      <div class="domain-tabs" role="tablist">
+        <button class="domain-tab active" role="tab" data-tab="curriculum">Curriculum</button>
+        <button class="domain-tab" role="tab" data-tab="projects">Projects</button>
+        <button class="domain-tab" role="tab" data-tab="events">Events</button>
+        <button class="domain-tab" role="tab" data-tab="visitors">Visitors</button>
+        <button class="domain-tab" role="tab" data-tab="video">Video</button>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════
+           CURRICULUM TAB
+      ════════════════════════════════════════════════ -->
+      <div class="tab-panel active" id="tab-curriculum">
+
+        <!-- 1 · PROGRAMME STATS BAR ──────────────────── -->
+        <div class="prog-stat-bar">
+          <div class="prog-stat">
+            <span class="prog-stat-num">22</span>
+            <span class="prog-stat-label">Total Credits</span>
+          </div>
+          <div class="prog-stat">
+            <span class="prog-stat-num">4</span>
+            <span class="prog-stat-label">Courses</span>
+          </div>
+          <div class="prog-stat">
+            <span class="prog-stat-num">100</span>
+            <span class="prog-stat-label">Days GTM Cycle</span>
+          </div>
+          <div class="prog-stat">
+            <span class="prog-stat-num">6+</span>
+            <span class="prog-stat-label">DS Tools</span>
+          </div>
+          <div class="prog-stat">
+            <span class="prog-stat-num">5</span>
+            <span class="prog-stat-label">GATE Stages</span>
+          </div>
+        </div>
+
+        <!-- 2 · CREDIT FLOW BAR ──────────────────────── -->
+        <div class="credit-flow-wrap">
+          <div class="credit-flow-label">Credit Distribution — 22 Credits Total</div>
+          <div class="credit-flow" title="Proportional credit allocation across 4 courses">
+            <div class="cs cs-1" title="CUGM2140 · 3 cr"><span class="cs-code">2140</span><span class="cs-cr">3 cr</span></div>
+            <div class="cs cs-2" title="CUGM2141 · 8 cr"><span class="cs-code">2141</span><span class="cs-cr">8 cr</span></div>
+            <div class="cs cs-3" title="CUGM2142 · 3 cr"><span class="cs-code">2142</span><span class="cs-cr">3 cr</span></div>
+            <div class="cs cs-4" title="CUGM2143 · 8 cr"><span class="cs-code">2143</span><span class="cs-cr">8 cr</span></div>
+          </div>
+          <div class="credit-flow-legend">
+            <div class="cfl-item"><div class="cfl-dot sem1"></div><span class="cfl-label">Phase 1 — Design &amp; Tools (Days 1–50)</span></div>
+            <div class="cfl-item"><div class="cfl-dot sem2"></div><span class="cfl-label">Phase 2 — Process &amp; PLM (Days 51–75)</span></div>
+            <div class="cfl-item"><div class="cfl-dot cap"></div><span class="cfl-label">Capstone Project (Days 76–100)</span></div>
+          </div>
+        </div>
+
+        <!-- 3 · PLATFORM STRIP ───────────────────────── -->
+        <div class="platform-strip">
+          <div class="platform-card">
+            <div class="platform-icon catia">
+              <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="rgba(77,179,230,0.9)" stroke-width="2">
+                <rect x="4" y="4" width="11" height="11" rx="1"/>
+                <rect x="17" y="4" width="11" height="11" rx="1"/>
+                <rect x="4" y="17" width="11" height="11" rx="1"/>
+                <path d="M17 22h6M20 19v6" stroke="rgba(77,179,230,0.6)"/>
+              </svg>
+            </div>
+            <div class="platform-info">
+              <span class="platform-name">CATIA / 3DExperience</span>
+              <div class="platform-tags">
+                <span class="platform-tag">Part Design</span>
+                <span class="platform-tag">Assembly</span>
+                <span class="platform-tag">Surfacing</span>
+                <span class="platform-tag">CAM</span>
+              </div>
+            </div>
+          </div>
+          <div class="platform-card">
+            <div class="platform-icon sim">
+              <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="rgba(56,178,91,0.9)" stroke-width="2">
+                <path d="M4 16 Q8 6 12 16 Q16 26 20 16 Q24 6 28 16"/>
+                <path d="M6 24 Q10 18 14 22 Q18 26 22 22 Q26 18 26 20" stroke="rgba(56,178,91,0.5)"/>
+              </svg>
+            </div>
+            <div class="platform-info">
+              <span class="platform-name">SIMULIA + DYMOLA</span>
+              <div class="platform-tags">
+                <span class="platform-tag">FEA</span>
+                <span class="platform-tag">CFD</span>
+                <span class="platform-tag">System Sim</span>
+                <span class="platform-tag">Digital Twin</span>
+              </div>
+            </div>
+          </div>
+          <div class="platform-card">
+            <div class="platform-icon enovia">
+              <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="rgba(224,64,251,0.9)" stroke-width="2">
+                <circle cx="16" cy="7" r="3"/>
+                <circle cx="7" cy="24" r="3"/>
+                <circle cx="25" cy="24" r="3"/>
+                <line x1="16" y1="10" x2="7" y2="21"/>
+                <line x1="16" y1="10" x2="25" y2="21"/>
+                <line x1="10" y1="24" x2="22" y2="24"/>
+              </svg>
+            </div>
+            <div class="platform-info">
+              <span class="platform-name">ENOVIA + DELMIA</span>
+              <div class="platform-tags">
+                <span class="platform-tag">PLM</span>
+                <span class="platform-tag">BOM</span>
+                <span class="platform-tag">Process</span>
+                <span class="platform-tag">Collaboration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 · TEACHING PRINCIPLES ─────────────────── -->
+        <div class="principles-section">
+          <div class="section-phase-header">
+            <span class="section-phase-pill">Teaching Philosophy</span>
+            <div class="section-phase-rule"></div>
+            <span class="section-phase-meta">Industry 5.0 Pedagogy · GoToMarket in 100 Days</span>
+          </div>
+          <div class="principles-grid">
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>GATE-Driven Progression</h5>
+                <p>No phase advancement without clearing each GATE checkpoint — quality is enforced by process, not just grading.</p>
+              </div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>PPR Framework First</h5>
+                <p>Every project starts by defining its Product, Process, and Resources — before any CATIA sketch is drawn.</p>
+              </div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 9l3 3 5-5"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>Digital Before Physical</h5>
+                <p>Validate fully in SIMULIA — structural, aerodynamic, thermal — before any physical prototype is commissioned.</p>
+              </div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><path d="M2 3h20v13H2z"/><path d="M8 21l4-8 4 8"/><line x1="12" y1="9" x2="12" y2="12"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>Demonstrate Then Design</h5>
+                <p>Every lab begins with a live instructor walkthrough on the DS platform. Students replicate before they create.</p>
+              </div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>Min &amp; Stretch Goals</h5>
+                <p>Every milestone specifies a minimum deliverable and a stretch target — no one stalls, no one is left unchallenged.</p>
+              </div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>Team-Based Projects</h5>
+                <p>2–4 person teams throughout. Shared accountability, defined roles, and real collaboration — not solo assignments.</p>
+              </div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 7 7c0 2.7-1.56 5.05-4 6.25V18H9v-2.75C6.56 14.05 5 11.7 5 9a7 7 0 0 1 7-7z"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>IPR from Day 1</h5>
+                <p>Every project is scoped to identify patentable innovations. Prior art search and patent claim drafting are built into CUGM2143.</p>
+              </div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 19.5 2 22 2 22 2 22c0 0 4-3.29 10.5-3.5 7-.23 8.5-3 8.5-3S22 8.5 17 8z"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>Go Green by Default</h5>
+                <p>EVs, agri-drones, and solar-integrated products are prioritised. Sustainability is a design constraint, not a bonus.</p>
+              </div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>Industry-Scale Problems</h5>
+                <p>No toy projects. Every capstone is a real-world product brief — designed, simulated, and digitally launched for market.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 · PHASE 1 ───────────────────────────────── -->
+        <div class="curriculum-roadmap">
+
+          <div class="semester-divider">
+            <div class="semester-divider-pill">Phase 1</div>
+            <div class="semester-divider-line"></div>
+            <div class="semester-divider-meta">2 Courses · 11 Credits · Days 1–50</div>
+          </div>
+
+          <div class="roadmap-phase">
+            <div class="roadmap-phase-header">
+              <span class="roadmap-phase-pill">Foundation — Design Thinking &amp; Tools</span>
+              <div class="roadmap-phase-rule"></div>
+            </div>
+            <div class="roadmap-phase-grid two-col">
+
+              <div class="course-card" data-num="01">
+                <span class="course-code">CUGM2140</span>
+                <div class="course-meta-row">
+                  <h4>Design Thinking &amp; Innovation Through GATE Process</h4>
+                  <span class="credit-chip">1-2-0 · 3 cr</span>
+                </div>
+                <div class="course-focus">Design Process + GTM Methodology · Days 1–25</div>
+                <ul class="course-topics">
+                  <li>Human-centred design: empathise → define → ideate → prototype → test</li>
+                  <li>PPR framework — defining Product, Process, and Resources for any brief</li>
+                  <li>Market analysis: competitive benchmarking, SWOT, and customer requirements</li>
+                  <li>GATE 0 deliverable: converting customer requirements to design parameters</li>
+                  <li>3DExperience platform onboarding: dashboards, roles, and first CATIA sketch</li>
+                  <li>GTM planning: product pitch structure, value proposition, and roadmap creation</li>
+                </ul>
+                <span class="course-prereq">Prereq: Basic engineering drawing literacy</span>
+              </div>
+
+              <div class="course-card" data-num="02">
+                <span class="course-code">CUGM2141</span>
+                <div class="course-meta-row">
+                  <h4>PLM Tools on Dassault Platform — DYMOLA, CATIA &amp; SIMULIA</h4>
+                  <span class="credit-chip">2-6-0 · 8 cr</span>
+                </div>
+                <div class="course-focus">CATIA + SIMULIA + DYMOLA · Days 5–50</div>
+                <ul class="course-topics">
+                  <li>DYMOLA: physics-based system modelling — powertrain, suspension, and structural parameter optimisation</li>
+                  <li>CATIA Part Design: parametric solid modelling, GD&amp;T, tolerancing, and feature history</li>
+                  <li>CATIA Assembly Design: constraint-based assemblies, motion studies, and BOM generation</li>
+                  <li>CATIA Generative Surface Design: Class A surfacing, skinning, and aesthetic styling</li>
+                  <li>SIMULIA Abaqus: FEA structural stress, modal analysis, and fatigue life prediction</li>
+                  <li>SIMULIA CFD: aerodynamic drag, thermal management, and fluid flow simulation</li>
+                  <li>Digital Twin creation: linking CATIA geometry to live SIMULIA behaviour models</li>
+                  <li>Gate 2–3 deliverables: full product drawing package + digital validation report</li>
+                </ul>
+                <span class="course-prereq">Prereq: CUGM2140</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- connector -->
+          <div class="roadmap-connector">
+            <div class="roadmap-connector-line"></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="roadmap-connector-line"></div>
+          </div>
+
+          <!-- 6 · PHASE 2 ─────────────────────────────── -->
+          <div class="semester-divider">
+            <div class="semester-divider-pill">Phase 2</div>
+            <div class="semester-divider-line"></div>
+            <div class="semester-divider-meta">1 Course · 3 Credits · Days 51–75</div>
+          </div>
+
+          <div class="roadmap-phase">
+            <div class="roadmap-phase-header">
+              <span class="roadmap-phase-pill">Process Management &amp; PLM</span>
+              <div class="roadmap-phase-rule"></div>
+            </div>
+            <div class="roadmap-phase-grid one-col">
+
+              <div class="course-card" data-num="03">
+                <span class="course-code">CUGM2142</span>
+                <div class="course-meta-row">
+                  <h4>Process Management Using ENOVIA</h4>
+                  <span class="credit-chip">1-2-0 · 3 cr</span>
+                </div>
+                <div class="course-focus">PLM + BOM + Process Engineering · Days 51–75</div>
+                <ul class="course-topics">
+                  <li>ENOVIA: product data management, revision control, and ECO/ECN change workflows</li>
+                  <li>Bill of Materials (BOM): EBOM and MBOM hierarchy, sub-assembly structure, make-or-buy decisions</li>
+                  <li>DELMIA Process Planner: manufacturing sequence simulation, ergonomics analysis, and cycle time optimisation</li>
+                  <li>Vendor development: supplier qualification criteria, RFQ process, and cost benchmarking methodology</li>
+                  <li>Gate 4–5 deliverables: regulatory certification checklist, production planning, and vendor list</li>
+                  <li>Project governance: risk register, weekly review cadence, milestone tracking, and documentation standards</li>
+                </ul>
+                <span class="course-prereq">Prereq: CUGM2141</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- connector -->
+          <div class="roadmap-connector">
+            <div class="roadmap-connector-line"></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="roadmap-connector-line"></div>
+          </div>
+
+          <!-- 7 · CAPSTONE ──────────────────────────── -->
+          <div class="roadmap-capstone">
+            <div class="capstone-badge">Capstone</div>
+            <div class="capstone-content">
+              <span class="course-code">CUGM2143 &nbsp;·&nbsp; 0-0-8 &nbsp;·&nbsp; 8 Credits &nbsp;·&nbsp; Days 76–100</span>
+              <h3>Product Development — GoToMarket in 100 Days</h3>
+              <p>Teams of 2–4 take a product from brief to digital launch in 25 days of intensive project work. Plan, design, simulate, validate, and present a working digital product to a faculty panel and Dassault Systèmes industry reviewers. All tracks require a complete 3DX model, SIMULIA validation report, BOM, and a live product pitch.</p>
+              <div class="capstone-tracks-grid">
+                <div class="capstone-track">
+                  <span class="track-letter">A</span>
+                  <span class="track-name">Electric Vehicle</span>
+                  <p class="track-detail">E-bike or e-scooter: powertrain in DYMOLA, full body in CATIA, validated in SIMULIA</p>
+                </div>
+                <div class="capstone-track">
+                  <span class="track-letter">B</span>
+                  <span class="track-name">E-Rickshaw</span>
+                  <p class="track-detail">800kg 4+1 passenger carrier: chassis, suspension, brakes, CATIA assembly + FEA</p>
+                </div>
+                <div class="capstone-track">
+                  <span class="track-letter">C</span>
+                  <span class="track-name">Agri Drone (UAV)</span>
+                  <p class="track-detail">Quadrotor for pesticide spraying or surveillance: CFD aerodynamics + structural load analysis</p>
+                </div>
+                <div class="capstone-track">
+                  <span class="track-letter">D</span>
+                  <span class="track-name">Humanoid Robot</span>
+                  <p class="track-detail">Robotic arm or torso: kinematics, actuation, motion simulation in CATIA Kinematics</p>
+                </div>
+                <div class="capstone-track">
+                  <span class="track-letter">E</span>
+                  <span class="track-name">AgriBot</span>
+                  <p class="track-detail">Ground-based autonomous agricultural robot: locomotion design, CAD assembly, BOM</p>
+                </div>
+                <div class="capstone-track">
+                  <span class="track-letter">F</span>
+                  <span class="track-name">Industrial Machine</span>
+                  <p class="track-detail">3D printer, pick-and-place robot cell, or CNC redesign: full mechanical + controls spec</p>
+                </div>
+                <div class="capstone-track">
+                  <span class="track-letter">G</span>
+                  <span class="track-name">Smart Mobility</span>
+                  <p class="track-detail">Novel micro-mobility concept: ideation through GATE 0–3, full digital prototype and pitch</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end curriculum-roadmap -->
+
+        <!-- 8 · CAREER PATHS ─────────────────────────── -->
+        <div class="career-strip">
+          <div class="career-strip-label">Career Paths This Programme Targets</div>
+          <span class="career-chip">Product Design Engineer</span>
+          <span class="career-chip">CAD / CAE Engineer</span>
+          <span class="career-chip">Simulation Engineer</span>
+          <span class="career-chip">PLM Consultant</span>
+          <span class="career-chip">Mechanical Design Engineer</span>
+          <span class="career-chip">Automotive Design Engineer</span>
+          <span class="career-chip">Robotics Design Engineer</span>
+          <span class="career-chip">Digital Twin Specialist</span>
+          <span class="career-chip">Systems Engineer</span>
+          <span class="career-chip">EV Powertrain Designer</span>
+          <span class="career-chip">Manufacturing Process Engineer</span>
+          <span class="career-chip">Startup Founder / Entrepreneur</span>
+          <span class="career-chip">IPR &amp; Patent Analyst</span>
+          <span class="career-chip">Industrial Designer</span>
+        </div>
+
+      </div><!-- end tab-curriculum -->
+
+      <!-- PROJECTS -->
+      <div class="tab-panel" id="tab-projects">
+        <div class="placeholder-panel">
+          <span class="placeholder-tag">Coming Soon</span>
+          <div class="placeholder-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M3 7h18M3 12h18M3 17h10"/></svg>
+          </div>
+          <h3>Student Projects</h3>
+          <p>Electric vehicles, drones, robotic systems, and autonomous machines built by IFN Industrial Design students. Portfolio being assembled.</p>
+        </div>
+      </div>
+
+      <!-- EVENTS -->
+      <div class="tab-panel" id="tab-events">
+        <div class="placeholder-panel">
+          <span class="placeholder-tag">Coming Soon</span>
+          <div class="placeholder-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3>Design Reviews &amp; Events</h3>
+          <p>GATE reviews, product critiques, Dassault Systèmes workshops, and Industry 5.0 design sprints hosted at IFN. Calendar loading soon.</p>
+        </div>
+      </div>
+
+      <!-- VISITORS -->
+      <div class="tab-panel" id="tab-visitors">
+        <div class="placeholder-panel">
+          <span class="placeholder-tag">Coming Soon</span>
+          <div class="placeholder-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <h3>Industry Visitors</h3>
+          <p>Dassault Systèmes engineers, product designers, and manufacturing experts who've visited IFN GTM Lab. Profiles being added.</p>
+        </div>
+      </div>
+
+      <!-- VIDEO -->
+      <div class="tab-panel" id="tab-video">
+        <a href="https://youtu.be/QILggTMxCHM" target="_blank" rel="noopener" style="display:block;text-decoration:none;">
+          <div style="position:relative;background:rgba(255,255,255,0.03);border:1px solid rgba(224,64,251,0.2);border-radius:16px;overflow:hidden;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;transition:border-color 0.2s,background 0.2s;" onmouseover="this.style.background='rgba(224,64,251,0.07)';this.style.borderColor='rgba(224,64,251,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(224,64,251,0.2)'">
+            <img src="https://img.youtube.com/vi/QILggTMxCHM/maxresdefault.jpg" alt="IFN Industrial Design — GTM Lab" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;" onerror="this.style.display='none'" />
+            <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1rem;text-align:center;padding:2rem;">
+              <div style="width:72px;height:72px;border-radius:50%;background:rgba(224,64,251,0.18);border:2px solid rgba(224,64,251,0.5);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="#e040fb"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div>
+                <p style="font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin:0 0 0.35rem;">GTM Lab — Industrial Design Domain</p>
+                <p style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:rgba(224,64,251,0.7);margin:0;letter-spacing:0.08em;text-transform:uppercase;">Watch on YouTube →</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="section-inner">
+      <div class="startup-cta-strip">
+        <div>
+          <h3>Design what the world uses next.</h3>
+          <p>Applications open for the next cohort of the Industrial Design — GTM Lab programme.</p>
+        </div>
+        <a href="index.html#about" class="btn-primary">Apply Now</a>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/images/logo-light.png" alt="School of Future Nexus" />
+          <p>Shaping Lives. Empowering Communities.<br/>A flagship institute of Centurion University, Odisha.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Domains</h5>
+          <ul>
+            <li><a href="domain-xr.html">XR Development</a></li>
+            <li><a href="domain-industrial.html">Industrial Design</a></li>
+            <li><a href="domain-blockchain.html">Blockchain Dev</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Institute</h5>
+          <ul>
+            <li><a href="index.html#about">About IFN</a></li>
+            <li><a href="index.html#about">Mission &amp; Vision</a></li>
+            <li><a href="index.html#facilities">Facilities</a></li>
+            <li><a href="index.html#team">Our Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="#">Twitter / X</a></li>
+            <li><a href="https://www.linkedin.com/company/cu-ifn/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="mailto:ifn@cutm.ac.in">ifn@cutm.ac.in</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 School of Future Nexus, Centurion University. All rights reserved.</span>
+        <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.querySelectorAll('.domain-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.domain-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blockchain Engineering — School of Future Nexus</title>
+  <meta name="description" content="Blockchain Engineering domain at IFN — Curriculum v3.0. Ethereum, Solana & Hyperledger Fabric. 6 courses, 22 credits, 2 semesters." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" type="image/png" href="assets/images/logo-dark.png" />
+  <style>
+    :root { --domain-color: #f59e0b; --domain-glow: rgba(245,158,11,0.15); }
+    .page-hero h1 em { font-style:normal; color: var(--domain-color); }
+    .domain-tab.active { border-bottom-color: var(--domain-color); }
+    .placeholder-panel .placeholder-icon { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.2); }
+    .placeholder-panel .placeholder-icon svg { stroke: rgba(245,158,11,0.7); }
+    .placeholder-tag { color: rgba(245,158,11,0.8); background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.15); }
+
+    /* ── Avalanche Badge ── */
+    .avalanche-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(232,65,66,0.1); border: 1px solid rgba(232,65,66,0.25);
+      border-radius: 8px; padding: 0.45rem 1rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 600;
+      color: #e84142; letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .avalanche-badge svg { width: 14px; height: 14px; fill: #e84142; }
+
+    /* ── Programme Stats Bar ── */
+    .prog-stat-bar {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 1px; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.07); border-radius: 16px;
+      overflow: hidden; margin-bottom: 2rem;
+    }
+    .prog-stat {
+      padding: 1.4rem 0.75rem; background: rgba(255,255,255,0.02);
+      text-align: center; transition: background 0.2s;
+    }
+    .prog-stat:hover { background: rgba(245,158,11,0.05); }
+    .prog-stat-num {
+      display: block; font-family: 'JetBrains Mono', monospace;
+      font-size: 1.8rem; font-weight: 900; color: var(--domain-color);
+      line-height: 1; margin-bottom: 0.35rem;
+    }
+    .prog-stat-label {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--grey);
+    }
+
+    /* ── Credit Flow Bar ── */
+    .credit-flow-wrap { margin-bottom: 2rem; }
+    .credit-flow-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3);
+      margin-bottom: 0.5rem;
+    }
+    .credit-flow {
+      display: flex; align-items: stretch; border-radius: 10px; overflow: hidden;
+      height: 44px; border: 1px solid rgba(255,255,255,0.06);
+    }
+    .cs { display: flex; align-items: center; justify-content: center; flex-direction: column;
+      gap: 0.1rem; transition: opacity 0.2s; cursor: default; }
+    .cs:hover { opacity: 0.85; }
+    .cs-code { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; color: rgba(255,255,255,0.9); letter-spacing: 0.04em; }
+    .cs-cr { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; color: rgba(255,255,255,0.5); }
+    .cs-1 { width: calc(3/22*100%); background: rgba(98,126,234,0.3); }
+    .cs-2 { width: calc(3/22*100%); background: rgba(98,126,234,0.5); }
+    .cs-3 { width: calc(4/22*100%); background: rgba(245,158,11,0.35); }
+    .cs-4 { width: calc(4/22*100%); background: rgba(153,69,255,0.3); }
+    .cs-5 { width: calc(4/22*100%); background: rgba(153,69,255,0.5); }
+    .cs-6 { width: calc(4/22*100%); background: rgba(245,158,11,0.6); }
+    .credit-flow-legend {
+      display: flex; gap: 1.5rem; margin-top: 0.6rem; flex-wrap: wrap;
+    }
+    .cfl-item { display: flex; align-items: center; gap: 0.4rem; }
+    .cfl-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+    .cfl-dot.sem1 { background: rgba(98,126,234,0.7); }
+    .cfl-dot.sem2 { background: rgba(153,69,255,0.7); }
+    .cfl-dot.cap { background: rgba(245,158,11,0.8); }
+    .cfl-label { font-size: 0.65rem; color: var(--grey); letter-spacing: 0.04em; }
+
+    /* ── Platform Strip ── */
+    .platform-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin-bottom: 2.5rem;
+    }
+    .platform-card {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px; transition: border-color 0.2s, background 0.2s;
+    }
+    .platform-card:hover { background: rgba(245,158,11,0.04); border-color: rgba(245,158,11,0.2); }
+    .platform-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .platform-icon.eth { background: rgba(98,126,234,0.15); border: 1px solid rgba(98,126,234,0.25); }
+    .platform-icon.sol { background: rgba(153,69,255,0.15); border: 1px solid rgba(153,69,255,0.25); }
+    .platform-icon.hlf { background: rgba(40,167,69,0.15); border: 1px solid rgba(40,167,69,0.25); }
+    .platform-info {}
+    .platform-name { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; line-height: 1; display: block; }
+    .platform-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.35rem; }
+    .platform-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.57rem; font-weight: 600;
+      color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05);
+      border-radius: 4px; padding: 0.15rem 0.45rem; letter-spacing: 0.04em;
+    }
+
+    /* ── Teaching Principles ── */
+    .principles-section { margin-bottom: 2.5rem; }
+    .section-phase-header { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1.25rem; }
+    .section-phase-pill {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.63rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--domain-color); border: 1px solid rgba(245,158,11,0.35);
+      border-radius: 20px; padding: 0.3rem 0.85rem; white-space: nowrap;
+    }
+    .section-phase-rule { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent); }
+    .section-phase-meta {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+      color: rgba(255,255,255,0.22); letter-spacing: 0.06em; white-space: nowrap;
+    }
+    .principles-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;
+    }
+    .principle-card {
+      padding: 1rem 1.1rem;
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px; display: flex; gap: 0.75rem; align-items: flex-start;
+    }
+    .principle-icon {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: rgba(245,158,11,0.09); border: 1px solid rgba(245,158,11,0.18);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 0.05rem;
+    }
+    .principle-icon svg { width: 13px; height: 13px; stroke: var(--domain-color); fill: none; stroke-width: 2; }
+    .principle-text h5 {
+      font-size: 0.77rem; font-weight: 700; color: #fff;
+      margin: 0 0 0.2rem; line-height: 1.3;
+    }
+    .principle-text p { font-size: 0.68rem; color: var(--grey); line-height: 1.6; margin: 0; }
+
+    /* ── Curriculum Roadmap ── */
+    .curriculum-roadmap { display: flex; flex-direction: column; }
+    .roadmap-phase { margin-bottom: 2.5rem; }
+    .roadmap-phase-header { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1.25rem; }
+    .roadmap-phase-pill {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.63rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--domain-color); border: 1px solid rgba(245,158,11,0.35);
+      border-radius: 20px; padding: 0.3rem 0.85rem; white-space: nowrap;
+    }
+    .roadmap-phase-rule { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent); }
+    .roadmap-phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .roadmap-phase-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+
+    .course-card {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px; padding: 1.5rem; position: relative; overflow: hidden;
+      transition: border-color 0.25s, background 0.25s, transform 0.25s;
+    }
+    .course-card::before {
+      content: attr(data-num); position: absolute; top: -0.3rem; right: 1rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 4rem; font-weight: 900;
+      color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none; user-select: none;
+    }
+    .course-card:hover { background: rgba(245,158,11,0.04); border-color: rgba(245,158,11,0.28); transform: translateY(-2px); }
+    .course-card .course-code {
+      display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--domain-color); margin-bottom: 0.35rem;
+    }
+    .course-card .course-meta-row {
+      display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem;
+    }
+    .course-card h4 { font-size: 0.93rem; font-weight: 700; margin: 0; line-height: 1.3; color: #fff; }
+    .course-card .credit-chip {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; font-weight: 600;
+      color: rgba(245,158,11,0.6); background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.15); border-radius: 5px;
+      padding: 0.15rem 0.45rem; white-space: nowrap; margin-left: auto;
+    }
+    .course-card .course-focus {
+      font-size: 0.7rem; color: rgba(255,255,255,0.35); margin: 0.35rem 0 0.5rem;
+      font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em;
+    }
+    .course-card p { font-size: 0.78rem; line-height: 1.75; color: var(--grey); margin: 0; }
+    .course-topics {
+      margin: 0.65rem 0 0; padding: 0; list-style: none;
+    }
+    .course-topics li {
+      font-size: 0.71rem; line-height: 1.65; color: var(--grey);
+      padding-left: 0.9rem; position: relative;
+    }
+    .course-topics li::before {
+      content: '›'; position: absolute; left: 0;
+      color: var(--domain-color); opacity: 0.55;
+    }
+    .course-prereq {
+      display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.57rem;
+      color: rgba(255,255,255,0.2); margin-top: 0.65rem; letter-spacing: 0.04em;
+    }
+
+    /* ── Connector ── */
+    .roadmap-connector { display: flex; align-items: center; gap: 0.8rem; margin: -0.5rem 0 2.5rem; padding: 0 0.5rem; opacity: 0.4; }
+    .roadmap-connector-line { flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+    .roadmap-connector svg { width: 14px; height: 14px; stroke: rgba(255,255,255,0.4); flex-shrink: 0; }
+
+    /* ── Semester Divider ── */
+    .semester-divider {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem;
+    }
+    .semester-divider-pill {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: #fff;
+      background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 20px; padding: 0.35rem 1rem; white-space: nowrap;
+    }
+    .semester-divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.06); }
+    .semester-divider-meta {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+      color: rgba(255,255,255,0.2); letter-spacing: 0.06em; white-space: nowrap;
+    }
+
+    /* ── Capstone ── */
+    .roadmap-capstone {
+      background: rgba(245,158,11,0.05); border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 18px; padding: 2rem 2.5rem;
+      display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start;
+      position: relative; overflow: hidden;
+    }
+    .roadmap-capstone::after {
+      content: 'VI'; position: absolute; right: 2rem; top: 50%; transform: translateY(-50%);
+      font-family: 'JetBrains Mono', monospace; font-size: 5rem; font-weight: 900;
+      color: rgba(245,158,11,0.05); line-height: 1; pointer-events: none;
+    }
+    .capstone-badge {
+      writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg);
+      font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--domain-color); opacity: 0.9; margin-top: 0.25rem;
+    }
+    .capstone-content .course-code {
+      display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--domain-color); margin-bottom: 0.5rem;
+    }
+    .capstone-content h3 { font-size: 1.3rem; font-weight: 800; margin: 0 0 0.4rem; line-height: 1.2; }
+    .capstone-content > p { font-size: 0.85rem; line-height: 1.8; color: var(--grey); margin: 0 0 1.25rem; }
+
+    /* ── Capstone Tracks ── */
+    .capstone-tracks-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.65rem;
+    }
+    .capstone-track {
+      padding: 1rem 0.85rem; text-align: center;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; transition: border-color 0.2s, background 0.2s;
+    }
+    .capstone-track:hover { background: rgba(245,158,11,0.06); border-color: rgba(245,158,11,0.28); }
+    .track-letter {
+      display: block; font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem; font-weight: 900; color: var(--domain-color);
+      opacity: 0.7; margin-bottom: 0.4rem; line-height: 1;
+    }
+    .track-name {
+      display: block; font-size: 0.72rem; font-weight: 700;
+      color: rgba(255,255,255,0.85); margin-bottom: 0.3rem; line-height: 1.3;
+    }
+    .track-detail {
+      font-size: 0.63rem; color: var(--grey); line-height: 1.5; margin: 0;
+    }
+
+    /* ── Career Strip ── */
+    .career-strip {
+      display: flex; gap: 0.55rem; flex-wrap: wrap;
+      padding: 1.5rem; margin-top: 2.5rem;
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 14px;
+    }
+    .career-strip-label {
+      width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+      font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.25); margin-bottom: 0.5rem;
+    }
+    .career-chip {
+      font-size: 0.73rem; font-weight: 600;
+      color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 0.32rem 0.85rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .career-chip:hover { color: var(--domain-color); border-color: rgba(245,158,11,0.3); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1100px) {
+      .principles-grid { grid-template-columns: repeat(3, 1fr); }
+      .capstone-tracks-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .prog-stat-bar { grid-template-columns: repeat(3, 1fr); }
+      .platform-strip { grid-template-columns: 1fr 1fr; }
+      .principles-grid { grid-template-columns: repeat(2, 1fr); }
+      .roadmap-phase-grid { grid-template-columns: 1fr 1fr; }
+      .roadmap-phase-grid.two-col { grid-template-columns: 1fr 1fr; }
+      .capstone-tracks-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .prog-stat-bar { grid-template-columns: repeat(2, 1fr); }
+      .platform-strip { grid-template-columns: 1fr; }
+      .principles-grid { grid-template-columns: 1fr; }
+      .roadmap-phase-grid { grid-template-columns: 1fr; }
+      .roadmap-phase-grid.two-col { grid-template-columns: 1fr; }
+      .roadmap-capstone { grid-template-columns: 1fr; }
+      .capstone-badge { writing-mode: horizontal-tb; transform: none; }
+      .capstone-tracks-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html">
+      <img src="assets/images/logo-light.png" alt="School of Future Nexus" />
+    </a>
+    <ul class="nav-links">
+      <li class="has-dropdown">
+        <a href="index.html#domains" class="nav-active">Research <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="domain-xr.html">XR Development</a></li>
+          <li><a href="domain-industrial.html">Industrial Design</a></li>
+          <li><a href="domain-blockchain.html">Blockchain Development</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="index.html#programs">Education &amp; Training <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="domain-xr.html">XR Curriculum</a></li>
+          <li><a href="domain-industrial.html">Industrial Design Curriculum</a></li>
+          <li><a href="domain-blockchain.html">Blockchain Curriculum</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="startups.html">Startups &amp; Community <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="https://thegttech.com/" target="_blank" rel="noopener">GramTarang Technologies</a></li>
+          <li><a href="https://superbeeaeronautics.com/" target="_blank" rel="noopener">SuperBee Aeronautics</a></li>
+          <li><a href="https://apexdevs.io/" target="_blank" rel="noopener">ApexDevs</a></li>
+          <li><a href="https://www.arcenpay.com/" target="_blank" rel="noopener">ArcenPay</a></li>
+          <li><a href="http://campustocrypto.com/" target="_blank" rel="noopener">Campus to Crypto</a></li>
+          <li><a href="https://sowsaathi.com/" target="_blank" rel="noopener">SowSaathi</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="index.html#about">About Us <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="index.html#about">About IFN</a></li>
+          <li><a href="index.html#facilities">Facilities &amp; Labs</a></li>
+          <li><a href="index.html#team">Our Team</a></li>
+          <li><a href="index.html#about">Apply Now</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></div>
+  </nav>
+
+  <span class="side-label left">School of Future Nexus</span>
+  <span class="side-label right">Centurion University</span>
+
+  <section class="page-hero">
+    <div class="blobs" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+    </div>
+    <div class="page-hero-inner">
+      <p class="section-label">Research Domain</p>
+      <div class="avalanche-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 19.5h20L12 2zm0 4.5l6.5 11h-13L12 6.5z"/></svg>
+        Avalanche Verified Programme
+      </div>
+      <h1><em>Blockchain</em> Engineering</h1>
+      <p class="page-hero-sub">
+        Odisha's first Avalanche-verified blockchain programme. Train on Ethereum, Solana and Hyperledger Fabric — build production DeFi applications, deploy NFT platforms, and graduate with on-chain proof of your skills.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="section-inner">
+
+      <div class="domain-tabs" role="tablist">
+        <button class="domain-tab active" role="tab" data-tab="curriculum">Curriculum</button>
+        <button class="domain-tab" role="tab" data-tab="projects">Projects</button>
+        <button class="domain-tab" role="tab" data-tab="events">Events</button>
+        <button class="domain-tab" role="tab" data-tab="visitors">Visitors</button>
+        <button class="domain-tab" role="tab" data-tab="video">Video</button>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════
+           CURRICULUM TAB
+      ════════════════════════════════════════════════ -->
+      <div class="tab-panel active" id="tab-curriculum">
+
+        <!-- 1 · PROGRAMME STATS BAR ──────────────────── -->
+        <div class="prog-stat-bar">
+          <div class="prog-stat">
+            <span class="prog-stat-num">22</span>
+            <span class="prog-stat-label">Total Credits</span>
+          </div>
+          <div class="prog-stat">
+            <span class="prog-stat-num">6</span>
+            <span class="prog-stat-label">Courses</span>
+          </div>
+          <div class="prog-stat">
+            <span class="prog-stat-num">2</span>
+            <span class="prog-stat-label">Semesters</span>
+          </div>
+          <div class="prog-stat">
+            <span class="prog-stat-num">80+</span>
+            <span class="prog-stat-label">Lab Sessions</span>
+          </div>
+          <div class="prog-stat">
+            <span class="prog-stat-num">3</span>
+            <span class="prog-stat-label">Platforms</span>
+          </div>
+        </div>
+
+        <!-- 2 · CREDIT FLOW BAR ──────────────────────── -->
+        <div class="credit-flow-wrap">
+          <div class="credit-flow-label">Credit Distribution — 22 Credits Total</div>
+          <div class="credit-flow" title="Proportional credit allocation across 6 courses">
+            <div class="cs cs-1" title="CUBD1091 · 3 cr"><span class="cs-code">1091</span><span class="cs-cr">3 cr</span></div>
+            <div class="cs cs-2" title="CUBD1092 · 3 cr"><span class="cs-code">1092</span><span class="cs-cr">3 cr</span></div>
+            <div class="cs cs-3" title="CUBD1093 · 4 cr"><span class="cs-code">1093</span><span class="cs-cr">4 cr</span></div>
+            <div class="cs cs-4" title="CUBD1094 · 4 cr"><span class="cs-code">1094</span><span class="cs-cr">4 cr</span></div>
+            <div class="cs cs-5" title="CUBD1095 · 4 cr"><span class="cs-code">1095</span><span class="cs-cr">4 cr</span></div>
+            <div class="cs cs-6" title="CUBD1096 · 4 cr"><span class="cs-code">1096</span><span class="cs-cr">4 cr</span></div>
+          </div>
+          <div class="credit-flow-legend">
+            <div class="cfl-item"><div class="cfl-dot sem1"></div><span class="cfl-label">Semester 1 — Foundations</span></div>
+            <div class="cfl-item"><div class="cfl-dot sem2"></div><span class="cfl-label">Semester 2 — Advanced</span></div>
+            <div class="cfl-item"><div class="cfl-dot cap"></div><span class="cfl-label">Capstone Project</span></div>
+          </div>
+        </div>
+
+        <!-- 3 · PLATFORM STRIP ───────────────────────── -->
+        <div class="platform-strip">
+          <div class="platform-card">
+            <div class="platform-icon eth">
+              <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
+                <polygon points="16,3 28,16 16,21" fill="rgba(98,126,234,0.9)"/>
+                <polygon points="16,3 4,16 16,21" fill="rgba(98,126,234,0.6)"/>
+                <polygon points="16,23 28,16 16,29" fill="rgba(98,126,234,0.7)"/>
+                <polygon points="16,23 4,16 16,29" fill="rgba(98,126,234,0.4)"/>
+              </svg>
+            </div>
+            <div class="platform-info">
+              <span class="platform-name">Ethereum</span>
+              <div class="platform-tags">
+                <span class="platform-tag">Solidity</span>
+                <span class="platform-tag">EVM</span>
+                <span class="platform-tag">DeFi</span>
+                <span class="platform-tag">NFT</span>
+              </div>
+            </div>
+          </div>
+          <div class="platform-card">
+            <div class="platform-icon sol">
+              <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
+                <rect x="4" y="6" width="22" height="4" rx="2" fill="rgba(153,69,255,0.9)"/>
+                <rect x="4" y="14" width="22" height="4" rx="2" fill="rgba(153,69,255,0.7)" transform="skewX(-10)"/>
+                <rect x="4" y="22" width="22" height="4" rx="2" fill="rgba(0,255,163,0.8)"/>
+              </svg>
+            </div>
+            <div class="platform-info">
+              <span class="platform-name">Solana</span>
+              <div class="platform-tags">
+                <span class="platform-tag">Rust</span>
+                <span class="platform-tag">Anchor</span>
+                <span class="platform-tag">SPL</span>
+                <span class="platform-tag">Speed</span>
+              </div>
+            </div>
+          </div>
+          <div class="platform-card">
+            <div class="platform-icon hlf">
+              <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="rgba(40,167,69,0.9)" stroke-width="2.5">
+                <circle cx="8" cy="16" r="4"/>
+                <circle cx="24" cy="16" r="4"/>
+                <line x1="12" y1="16" x2="20" y2="16"/>
+                <line x1="8" y1="12" x2="8" y2="6"/>
+                <line x1="24" y1="12" x2="24" y2="6"/>
+              </svg>
+            </div>
+            <div class="platform-info">
+              <span class="platform-name">Hyperledger Fabric</span>
+              <div class="platform-tags">
+                <span class="platform-tag">Go</span>
+                <span class="platform-tag">Enterprise</span>
+                <span class="platform-tag">Private</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 · TEACHING PRINCIPLES ─────────────────── -->
+        <div class="principles-section">
+          <div class="section-phase-header">
+            <span class="section-phase-pill">Teaching Philosophy</span>
+            <div class="section-phase-rule"></div>
+            <span class="section-phase-meta">Designed for slow learners · Zero prior background required</span>
+          </div>
+          <div class="principles-grid">
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>Analogy Before Abstraction</h5>
+                <p>Every concept starts with a real-world analogy before technical detail — e.g. 'a hash is like a fingerprint'.</p>
+              </div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><path d="M2 12h20M12 2l10 10-10 10"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>Demonstrate Then Do</h5>
+                <p>Every lab starts with a live instructor walkthrough. Students copy a working example before modifying it.</p>
+              </div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>Min &amp; Stretch Goals</h5>
+                <p>Every lab specifies a minimum passing target AND a stretch goal — no one waits, no one is left behind.</p>
+              </div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>Peer Programming</h5>
+                <p>Used in the first 6 labs of Course 3. Two students, one computer — builds confidence and accelerates learning.</p>
+              </div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>Explain Your Code</h5>
+                <p>Every submission requires one-line comments on every function. Students explain code verbally during demos.</p>
+              </div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>Ethereum + Solana Side by Side</h5>
+                <p>From Course 2, every architectural concept is shown on both platforms. Graduates have genuine multi-chain competency.</p>
+              </div>
+            </div>
+            <div class="principle-card">
+              <div class="principle-icon">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div class="principle-text">
+                <h5>Research Capped at 10%</h5>
+                <p>No course requires more than 10% research. All remaining weight is applied labs, projects, and demonstrations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 · SEMESTER 1 ───────────────────────────── -->
+        <div class="curriculum-roadmap">
+
+          <div class="semester-divider">
+            <div class="semester-divider-pill">Semester 1</div>
+            <div class="semester-divider-line"></div>
+            <div class="semester-divider-meta">3 Courses · 10 Credits · Weeks 1–16</div>
+          </div>
+
+          <div class="roadmap-phase">
+            <div class="roadmap-phase-header">
+              <span class="roadmap-phase-pill">Phase 1 — Conceptual Foundations</span>
+              <div class="roadmap-phase-rule"></div>
+            </div>
+            <div class="roadmap-phase-grid">
+
+              <div class="course-card" data-num="01">
+                <span class="course-code">CUBD1091</span>
+                <div class="course-meta-row">
+                  <h4>Foundations of the Decentralised Internet</h4>
+                  <span class="credit-chip">1-2-0 · 3 cr</span>
+                </div>
+                <div class="course-focus">Concepts + Economics · Sem 1, Wk 1</div>
+                <ul class="course-topics">
+                  <li>Web1 → Web2 → Web3 evolution &amp; the case for decentralisation</li>
+                  <li>Money, the 2008 crisis, and why Bitcoin was invented</li>
+                  <li>Cryptography basics — hash functions, keys, digital signatures</li>
+                  <li>Tokenomics, CBDCs, e-Rupee, and Metaverse economies</li>
+                  <li>The blockchain ecosystem map — DeFi, NFTs, DAOs, wallets</li>
+                </ul>
+                <span class="course-prereq">Prereq: Basic computer literacy only</span>
+              </div>
+
+              <div class="course-card" data-num="02">
+                <span class="course-code">CUBD1092</span>
+                <div class="course-meta-row">
+                  <h4>Blockchain Architecture &amp; How It Works</h4>
+                  <span class="credit-chip">1-2-0 · 3 cr</span>
+                </div>
+                <div class="course-focus">Architecture + Tools · Sem 1, Wk 6</div>
+                <ul class="course-topics">
+                  <li>Merkle trees, hash pointers, UTXO vs. account model</li>
+                  <li>Proof of Work vs. Proof of Stake · The Merge (Sep 2022)</li>
+                  <li>Ethereum architecture — EVM, Execution Layer, Beacon Chain</li>
+                  <li>Solana — Proof of History, Tower BFT, Sealevel parallel execution</li>
+                  <li>Layer 2 rollups (Arbitrum, zkSync) · The Blockchain Trilemma</li>
+                </ul>
+                <span class="course-prereq">Prereq: CUBD1091</span>
+              </div>
+
+              <div class="course-card" data-num="03">
+                <span class="course-code">CUBD1093</span>
+                <div class="course-meta-row">
+                  <h4>Smart Contract Development</h4>
+                  <span class="credit-chip">1-2-1 · 4 cr</span>
+                </div>
+                <div class="course-focus">Solidity + Solana Dev · Sem 1, Wk 11</div>
+                <ul class="course-topics">
+                  <li>Solidity — data types, mappings, events, modifiers, inheritance</li>
+                  <li>ERC-20 fungible tokens with OpenZeppelin</li>
+                  <li>ERC-721 NFTs with IPFS metadata via Pinata</li>
+                  <li>Foundry toolchain — Forge, Anvil, Cast; test coverage &amp; gas reports</li>
+                  <li>Security — reentrancy, overflow, access control; Slither analysis</li>
+                  <li>Solana Anchor framework — counter program + SPL tokens</li>
+                </ul>
+                <span class="course-prereq">Prereq: CUBD1091 + CUBD1092</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- connector -->
+          <div class="roadmap-connector">
+            <div class="roadmap-connector-line"></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="roadmap-connector-line"></div>
+          </div>
+
+          <!-- 6 · SEMESTER 2 ─────────────────────────── -->
+          <div class="semester-divider">
+            <div class="semester-divider-pill">Semester 2</div>
+            <div class="semester-divider-line"></div>
+            <div class="semester-divider-meta">3 Courses · 12 Credits · Weeks 1–16</div>
+          </div>
+
+          <div class="roadmap-phase">
+            <div class="roadmap-phase-header">
+              <span class="roadmap-phase-pill">Phase 2 — Advanced Practice</span>
+              <div class="roadmap-phase-rule"></div>
+            </div>
+            <div class="roadmap-phase-grid two-col">
+
+              <div class="course-card" data-num="04">
+                <span class="course-code">CUBD1094</span>
+                <div class="course-meta-row">
+                  <h4>Full Stack Web3 Development</h4>
+                  <span class="credit-chip">1-2-1 · 4 cr</span>
+                </div>
+                <div class="course-focus">Full-Stack DApp Dev · Sem 2, Wk 1</div>
+                <ul class="course-topics">
+                  <li>React + wagmi + viem + RainbowKit — wallet connection &amp; on-chain reads</li>
+                  <li>Writing transactions with real-time pending/success/error states</li>
+                  <li>The Graph — subgraph deployment, GraphQL queries in React</li>
+                  <li>Sign-In with Ethereum (SIWE, EIP-4361) via Next.js</li>
+                  <li>NFT minting DApp — IPFS upload, mint, gallery display</li>
+                  <li>Solana Wallet Adapter; deploy to Vercel + Sepolia testnet</li>
+                </ul>
+                <span class="course-prereq">Prereq: CUBD1093</span>
+              </div>
+
+              <div class="course-card" data-num="05">
+                <span class="course-code">CUBD1095</span>
+                <div class="course-meta-row">
+                  <h4>Advanced Blockchain &amp; Industry Applications</h4>
+                  <span class="credit-chip">1-2-1 · 4 cr</span>
+                </div>
+                <div class="course-focus">DeFi + Security + Fabric · Sem 2, Wk 5</div>
+                <ul class="course-topics">
+                  <li>AMM design — Uniswap v2 constant product formula x·y=k</li>
+                  <li>Lending protocols (Aave mechanics), staking reward accumulators</li>
+                  <li>DAO governance — OpenZeppelin Governor + TimelockController</li>
+                  <li>NFT marketplace — listing, buying, EIP-2981 royalties</li>
+                  <li>Security audit methodology — Slither, Aderyn, audit reports</li>
+                  <li>Hyperledger Fabric — peers, orderers, channels, Go chaincode</li>
+                </ul>
+                <span class="course-prereq">Prereq: CUBD1093 + CUBD1094</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- connector -->
+          <div class="roadmap-connector">
+            <div class="roadmap-connector-line"></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="roadmap-connector-line"></div>
+          </div>
+
+          <!-- 7 · CAPSTONE ──────────────────────────── -->
+          <div class="roadmap-capstone">
+            <div class="capstone-badge">Capstone</div>
+            <div class="capstone-content">
+              <span class="course-code">CUBD1096 &nbsp;·&nbsp; 0-0-4 &nbsp;·&nbsp; 4 Credits &nbsp;·&nbsp; Sem 2 Wk 9–16</span>
+              <h3>Capstone Project in Blockchain Engineering</h3>
+              <p>Teams of two build and deploy a complete blockchain project over 8 weeks. Plan, architect, code, test, secure, and ship. Reviewed by faculty and an industry guest. All 5 tracks require a live Vercel URL and a verified testnet deployment.</p>
+              <div class="capstone-tracks-grid">
+                <div class="capstone-track">
+                  <span class="track-letter">A</span>
+                  <span class="track-name">DeFi DApp</span>
+                  <p class="track-detail">ERC-20 + AMM swap or staking + React frontend + Foundry tests</p>
+                </div>
+                <div class="capstone-track">
+                  <span class="track-letter">B</span>
+                  <span class="track-name">NFT Platform</span>
+                  <p class="track-detail">ERC-721 collection + marketplace or minting DApp on Eth or Solana</p>
+                </div>
+                <div class="capstone-track">
+                  <span class="track-letter">C</span>
+                  <span class="track-name">DAO App</span>
+                  <p class="track-detail">Governance token + Governor + Timelock + proposal &amp; vote DApp</p>
+                </div>
+                <div class="capstone-track">
+                  <span class="track-letter">D</span>
+                  <span class="track-name">Security Audit</span>
+                  <p class="track-detail">Slither + manual audit + 1500-word report + 5 findings + fixes</p>
+                </div>
+                <div class="capstone-track">
+                  <span class="track-letter">E</span>
+                  <span class="track-name">Hyperledger App</span>
+                  <p class="track-detail">Fabric 2-org network + Go chaincode (5 functions) + Node.js client</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end curriculum-roadmap -->
+
+        <!-- 8 · CAREER PATHS ─────────────────────────── -->
+        <div class="career-strip">
+          <div class="career-strip-label">Career Paths This Programme Targets</div>
+          <span class="career-chip">Smart Contract Developer</span>
+          <span class="career-chip">Solana Program Developer</span>
+          <span class="career-chip">Full-Stack Web3 Developer</span>
+          <span class="career-chip">DeFi Protocol Engineer</span>
+          <span class="career-chip">Smart Contract Security Auditor</span>
+          <span class="career-chip">NFT Platform Developer</span>
+          <span class="career-chip">DAO Governance Engineer</span>
+          <span class="career-chip">Enterprise Blockchain Developer</span>
+          <span class="career-chip">Blockchain Product Manager</span>
+          <span class="career-chip">Web3 Content Writer</span>
+          <span class="career-chip">CBDC / FinTech Analyst</span>
+          <span class="career-chip">Blockchain Solutions Architect</span>
+          <span class="career-chip">Protocol Support Engineer</span>
+        </div>
+
+      </div><!-- end tab-curriculum -->
+
+      <!-- PROJECTS -->
+      <div class="tab-panel" id="tab-projects">
+        <div class="placeholder-panel">
+          <span class="placeholder-tag">Coming Soon</span>
+          <div class="placeholder-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M3 7h18M3 12h18M3 17h10"/></svg>
+          </div>
+          <h3>Student Projects</h3>
+          <p>DeFi protocols, NFT platforms, DAO systems, and security audits built by IFN blockchain students. Projects being documented.</p>
+        </div>
+      </div>
+
+      <!-- EVENTS -->
+      <div class="tab-panel" id="tab-events">
+        <div class="placeholder-panel">
+          <span class="placeholder-tag">Coming Soon</span>
+          <div class="placeholder-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3>Hackathons &amp; Events</h3>
+          <p>Web3 hackathons, ETHIndia, Solana India events, and blockchain workshops hosted at IFN. 50+ events run by Campus to Crypto. Calendar loading soon.</p>
+        </div>
+      </div>
+
+      <!-- VISITORS -->
+      <div class="tab-panel" id="tab-visitors">
+        <div class="placeholder-panel">
+          <span class="placeholder-tag">Coming Soon</span>
+          <div class="placeholder-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <h3>Industry Visitors</h3>
+          <p>Protocol engineers, Avalanche Foundation team members, and DeFi founders who've visited IFN. Profiles being added.</p>
+        </div>
+      </div>
+
+      <!-- VIDEO -->
+      <div class="tab-panel" id="tab-video">
+        <div class="placeholder-panel">
+          <span class="placeholder-tag">Coming Soon</span>
+          <div class="placeholder-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <h3>Lab &amp; Demo Videos</h3>
+          <p>Live testnet deployments, smart contract code walkthroughs, and security audits. Videos uploading soon.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="section-inner">
+      <div class="startup-cta-strip">
+        <div>
+          <h3>Ship on-chain. Graduate verified.</h3>
+          <p>Applications open for the next cohort of the Blockchain Engineering programme.</p>
+        </div>
+        <a href="index.html#about" class="btn-primary">Apply Now</a>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/images/logo-light.png" alt="School of Future Nexus" />
+          <p>Shaping Lives. Empowering Communities.<br/>A flagship institute of Centurion University, Odisha.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Domains</h5>
+          <ul>
+            <li><a href="domain-xr.html">XR Development</a></li>
+            <li><a href="domain-industrial.html">Industrial Design</a></li>
+            <li><a href="domain-blockchain.html">Blockchain Dev</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Institute</h5>
+          <ul>
+            <li><a href="index.html#about">About IFN</a></li>
+            <li><a href="index.html#about">Mission &amp; Vision</a></li>
+            <li><a href="index.html#facilities">Facilities</a></li>
+            <li><a href="index.html#team">Our Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="#">Twitter / X</a></li>
+            <li><a href="https://www.linkedin.com/company/cu-ifn/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="mailto:ifn@cutm.ac.in">ifn@cutm.ac.in</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 School of Future Nexus, Centurion University. All rights reserved.</span>
+        <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.querySelectorAll('.domain-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.domain-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

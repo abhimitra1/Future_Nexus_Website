@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About IFN — School of Future Nexus, Centurion University</title>
+  <meta name="description" content="The Institute of Future Nexus is Centurion University's flagship applied technology research institute — training the engineers, designers, and builders who define what comes next." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" type="image/png" href="assets/images/logo-dark.png" />
+  <style>
+    /* ── About page specific ── */
+    .about-hero-label { color: var(--blue); }
+
+    .about-story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-bottom: 6rem;
+    }
+    .about-story-text h2 { margin-bottom: 1.5rem; }
+    .about-story-text p  { margin-bottom: 1.2rem; font-size: 0.95rem; line-height: 1.9; }
+    .about-story-text p:last-child { margin-bottom: 0; }
+
+    .about-story-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .story-stat {
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+    }
+    .story-stat:first-child { grid-column: 1 / -1; background: rgba(37,99,235,0.07); border-color: rgba(37,99,235,0.18); }
+    .story-stat-num {
+      font-family: 'Manrope', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #fff, #60a5fa);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .story-stat-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); }
+
+    /* Principles */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .principle-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .principle-card:hover { border-color: rgba(59,130,246,0.25); transform: translateY(-3px); }
+    .principle-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.5), transparent);
+    }
+    .principle-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem; font-weight: 700;
+      color: rgba(96,165,250,0.7);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .principle-card h3 { font-size: 1.15rem; margin-bottom: 0.75rem; color: var(--white); }
+    .principle-card p  { font-size: 0.875rem; line-height: 1.75; }
+
+    /* Mission/Vision strip */
+    .mv-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+    .mv-strip-card {
+      border-radius: 18px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .mv-strip-card.mission {
+      background: rgba(29,78,216,0.08);
+      border: 1px solid rgba(37,99,235,0.2);
+    }
+    .mv-strip-card.vision {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.09);
+    }
+    .mv-strip-card .mv-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #60a5fa;
+      margin-bottom: 1rem; display: block;
+    }
+    .mv-strip-card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+    .mv-strip-card p  { font-size: 0.92rem; line-height: 1.85; }
+    .mv-bg-num {
+      position: absolute; bottom: -0.5rem; right: 1.5rem;
+      font-size: 9rem; font-weight: 900; line-height: 1;
+      color: rgba(255,255,255,0.03); pointer-events: none;
+      font-family: 'Manrope', sans-serif;
+    }
+
+    /* Partners */
+    .partners-strip {
+      margin-top: 5rem;
+      padding-top: 4rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .partners-label {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); text-align: center; margin-bottom: 2.5rem;
+    }
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .partner-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 2rem 1.75rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .partner-card:hover { border-color: rgba(59,130,246,0.25); transform: translateY(-2px); }
+    .partner-type {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #60a5fa;
+    }
+    .partner-name { font-size: 1rem; font-weight: 700; color: var(--white); }
+    .partner-desc { font-size: 0.82rem; line-height: 1.65; }
+
+    /* University 2-col grid */
+    .university-grid {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+    .university-image-wrap {
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .university-image-wrap img {
+      width: 100%; height: auto;
+      display: block;
+    }
+    .university-text h2 { margin-bottom: 0; }
+    @media (max-width: 900px) {
+      .university-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .university-image-wrap { max-width: 420px; }
+    }
+
+    /* Team teaser */
+    .team-teaser {
+      margin-top: 5rem;
+      padding: 3rem;
+      background: rgba(37,99,235,0.06);
+      border: 1px solid rgba(37,99,235,0.15);
+      border-radius: 18px;
+      display: flex; align-items: center; gap: 3rem; flex-wrap: wrap;
+    }
+    .team-teaser-avatars {
+      display: flex;
+    }
+    .team-teaser-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      border: 2px solid rgba(7,12,23,1);
+      overflow: hidden; flex-shrink: 0;
+      margin-left: -12px;
+    }
+    .team-teaser-avatar:first-child { margin-left: 0; }
+    .team-teaser-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .team-teaser-avatar.av-placeholder {
+      background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 700; color: #fff;
+    }
+    .team-teaser-text { flex: 1; }
+    .team-teaser-text h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+    .team-teaser-text p { font-size: 0.88rem; }
+
+    @media (max-width: 900px) {
+      .about-story { grid-template-columns: 1fr; gap: 3rem; }
+      .principles-grid { grid-template-columns: 1fr; }
+      .mv-strip { grid-template-columns: 1fr; }
+      .partners-grid { grid-template-columns: 1fr 1fr; }
+      .team-teaser { flex-direction: column; gap: 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .partners-grid { grid-template-columns: 1fr; }
+      .about-story-visual { grid-template-columns: 1fr; }
+      .story-stat:first-child { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html">
+      <img src="assets/images/logo-light.png" alt="School of Future Nexus" />
+    </a>
+    <ul class="nav-links">
+      <li class="has-dropdown">
+        <a href="index.html#domains">Research <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="domain-xr.html">XR Development</a></li>
+          <li><a href="domain-industrial.html">Industrial Design</a></li>
+          <li><a href="domain-blockchain.html">Blockchain Development</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="index.html#programs">Education &amp; Training <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="domain-xr.html">XR Curriculum</a></li>
+          <li><a href="domain-industrial.html">Industrial Design Curriculum</a></li>
+          <li><a href="domain-blockchain.html">Blockchain Curriculum</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="startups.html">Startups &amp; Community <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="https://thegttech.com/" target="_blank" rel="noopener">GramTarang Technologies</a></li>
+          <li><a href="https://superbeeaeronautics.com/" target="_blank" rel="noopener">SuperBee Aeronautics</a></li>
+          <li><a href="https://apexdevs.io/" target="_blank" rel="noopener">ApexDevs</a></li>
+          <li><a href="https://www.arcenpay.com/" target="_blank" rel="noopener">ArcenPay</a></li>
+          <li><a href="http://campustocrypto.com/" target="_blank" rel="noopener">Campus to Crypto</a></li>
+          <li><a href="https://sowsaathi.com/" target="_blank" rel="noopener">SowSaathi</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="about.html" class="nav-active">About Us <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <ul class="nav-dropdown">
+          <li><a href="about.html">About IFN</a></li>
+          <li><a href="facilities.html">Facilities &amp; Labs</a></li>
+          <li><a href="index.html#team">Our Team</a></li>
+          <li><a href="index.html#about">Apply Now</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></div>
+  </nav>
+
+  <span class="side-label left">School of Future Nexus</span>
+  <span class="side-label right">Centurion University</span>
+
+  <!-- ═══════ HERO ═══════ -->
+  <section class="page-hero">
+    <div class="blobs" aria-hidden="true">
+      <div class="blob blob-cyan-lg"></div>
+      <div class="blob blob-blue-lg"></div>
+    </div>
+    <div class="page-hero-inner">
+      <p class="section-label">About the Institute</p>
+      <h1>Built for the<br/>technologies that<br/>don't exist yet.</h1>
+      <p class="page-hero-sub" style="max-width:620px;">
+        The Institute of Future Nexus is Centurion University's flagship centre for applied
+        research and advanced technology education — where emerging disciplines become
+        degree programmes before the industry even has a name for them.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════ STORY ═══════ -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-inner">
+
+      <div class="about-story">
+        <div class="about-story-text reveal">
+          <p class="section-label">Our Story</p>
+          <h2>From a conviction<br/>to an institution</h2>
+          <p>
+            IFN was founded on a single conviction: that the most consequential technologies of
+            the next decade — spatial computing, decentralised infrastructure, intelligent product
+            design — would not be learned from textbooks. They would be learned by building with them.
+          </p>
+          <p>
+            Established as a flagship initiative of Centurion University, Odisha, IFN was designed
+            from the ground up as a practitioner's institute. Not a department. Not a centre of
+            excellence in name only. A place where every course ends with something shipped —
+            a deployed smart contract, a published XR application, a manufactured product prototype.
+          </p>
+          <p>
+            In a short span, IFN has produced six student-led startups, earned Odisha's first
+            Avalanche Foundation programme verification, and placed graduates at organisations
+            including Deloitte and iServeU. The infrastructure, partnerships, and culture that made
+            that possible are still being built.
+          </p>
+        </div>
+        <div class="about-story-visual reveal reveal-delay-1">
+          <div class="story-stat">
+            <div class="story-stat-num">Odisha's First</div>
+            <div class="story-stat-label">Avalanche-Verified Blockchain Programme</div>
+          </div>
+          <div class="story-stat">
+            <div class="story-stat-num">6</div>
+            <div class="story-stat-label">Student-Led Startups</div>
+          </div>
+          <div class="story-stat">
+            <div class="story-stat-num">50+</div>
+            <div class="story-stat-label">Industry Events &amp; Hackathons</div>
+          </div>
+          <div class="story-stat">
+            <div class="story-stat-num">3</div>
+            <div class="story-stat-label">Frontier Technology Domains</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mission / Vision -->
+      <p class="section-label reveal">Purpose</p>
+      <h2 class="reveal">Why we exist</h2>
+      <div class="mv-strip">
+        <div class="mv-strip-card mission reveal">
+          <span class="mv-label">Mission</span>
+          <h3>Develop practitioners, not passengers.</h3>
+          <p>
+            To train the next generation of technology practitioners through applied, production-grade
+            education — where students graduate with portfolios of deployed work, verified skills,
+            and the discipline to build things that matter.
+          </p>
+          <span class="mv-bg-num">M</span>
+        </div>
+        <div class="mv-strip-card vision reveal reveal-delay-1">
+          <span class="mv-label">Vision</span>
+          <h3>Eastern India's premier applied technology institute.</h3>
+          <p>
+            To be the most recognised institution in Eastern India for producing engineers, designers,
+            and builders who are ready to work, found, and lead in the industries that will define
+            the next quarter-century.
+          </p>
+          <span class="mv-bg-num">V</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ PRINCIPLES ═══════ -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-inner">
+      <p class="section-label reveal">How We Work</p>
+      <h2 class="reveal">Four principles<br/>that run the institute</h2>
+      <div class="principles-grid">
+
+        <div class="principle-card reveal">
+          <span class="principle-num">01 — Build First</span>
+          <h3>Theory follows practice.</h3>
+          <p>
+            Every module is designed backwards from a deliverable. Students build before they
+            fully understand — because that is how understanding actually forms. Lectures exist
+            to explain what just broke, not to preempt it.
+          </p>
+        </div>
+
+        <div class="principle-card reveal reveal-delay-1">
+          <span class="principle-num">02 — Industry Standard Tools</span>
+          <h3>Real tools from day one.</h3>
+          <p>
+            IFN labs run the same software stack used in industry: Unity, Unreal Engine, Blender,
+            SolidWorks, Dassault 3DEXPERIENCE, Hardhat, Foundry, and live blockchain testnets.
+            No simplified substitutes. No educational licences that produce unemployable workflows.
+          </p>
+        </div>
+
+        <div class="principle-card reveal">
+          <span class="principle-num">03 — Verified Outcomes</span>
+          <h3>Credentials that mean something.</h3>
+          <p>
+            IFN programme outcomes are verified by external institutions — not just Centurion
+            University. The blockchain programme carries Avalanche Foundation verification.
+            This external accountability shapes how every course is designed and assessed.
+          </p>
+        </div>
+
+        <div class="principle-card reveal reveal-delay-1">
+          <span class="principle-num">04 — Community is Infrastructure</span>
+          <h3>The peer group is part of the education.</h3>
+          <p>
+            IFN deliberately builds cohorts that stay connected after graduation. Founders are
+            given continued lab access. Alumni mentor incoming batches. The community that forms
+            inside IFN is designed to produce collaborators and co-founders, not just classmates.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ INSTITUTIONAL CONTEXT ═══════ -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-inner">
+
+      <div class="university-grid reveal">
+        <div class="university-image-wrap">
+          <img src="assets/images/about.png" alt="Centurion University — School of Future Nexus" />
+        </div>
+        <div class="university-text">
+          <p class="section-label">Institutional Context</p>
+          <h2>Part of a university built<br/>to shape lives.</h2>
+          <p style="margin-top:1rem;font-size:0.95rem;line-height:1.9;color:rgba(180,190,230,0.75);">
+            Centurion University of Technology and Management is one of Odisha's most dynamic
+            private universities, with campuses across the state and a track record of industry
+            partnerships, research output, and placement outcomes. IFN is Centurion's bet on what
+            higher education looks like in the age of spatial computing, blockchain infrastructure,
+            and AI-driven design. Within the university system, IFN operates with the mandate to
+            move fast — to stand up programmes in technologies that other institutions won't touch
+            for five years.
+          </p>
+        </div>
+      </div>
+
+      <div class="partners-strip">
+        <p class="partners-label">Institutional Partners &amp; Verifications</p>
+        <div class="partners-grid">
+          <div class="partner-card reveal">
+            <span class="partner-type">Academic Parent</span>
+            <span class="partner-name">Centurion University</span>
+            <p class="partner-desc">
+              One of Odisha's leading private universities — NAAC accredited, UGC recognised,
+              with a presence across multiple campuses in Odisha and Andhra Pradesh.
+            </p>
+          </div>
+          <div class="partner-card reveal reveal-delay-1">
+            <span class="partner-type">Protocol Partner &amp; Programme Verifier</span>
+            <span class="partner-name">Avalanche Foundation</span>
+            <p class="partner-desc">
+              IFN's Blockchain Development programme is verified by the Avalanche Foundation —
+              making it Odisha's first protocol-verified blockchain education programme.
+            </p>
+          </div>
+          <div class="partner-card reveal reveal-delay-2">
+            <span class="partner-type">Technology Partner</span>
+            <span class="partner-name">Dassault Systèmes</span>
+            <p class="partner-desc">
+              Industrial Design students train on the 3DEXPERIENCE platform — the same
+              collaborative product development environment used by aerospace, automotive,
+              and consumer product companies worldwide.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team teaser -->
+      <div class="team-teaser reveal">
+        <div class="team-teaser-avatars">
+          <div class="team-teaser-avatar"><img src="assets/images/team-members/Swarna%20Madam%20Large.jpeg" alt="Dr. Swarnaprabha Jena" /></div>
+          <div class="team-teaser-avatar"><img src="assets/images/team-members/Rajendra%20Large.jpeg" alt="Rajendra Maharana" /></div>
+          <div class="team-teaser-avatar"><img src="assets/images/team-members/Banjita%20Large.jpeg" alt="Banjita Priyadarshini" /></div>
+          <div class="team-teaser-avatar"><img src="assets/images/team-members/Laxmidhar%20reddy%20Large.jpeg" alt="Laxmidhar Reddy" /></div>
+          <div class="team-teaser-avatar"><img src="assets/images/team-members/Avinash%20Singh%20Large.jpeg" alt="Avinash Singh" /></div>
+          <div class="team-teaser-avatar av-placeholder">+7</div>
+        </div>
+        <div class="team-teaser-text">
+          <h3>Meet the faculty &amp; instructors</h3>
+          <p>Practitioners and researchers bringing real industry depth — from XR studios, design firms, and blockchain protocols — into every classroom and lab.</p>
+        </div>
+        <a href="index.html#team" class="btn-primary" style="white-space:nowrap;">
+          Meet the Team
+          <svg viewBox="0 0 24 24" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ CTA ═══════ -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-inner">
+      <div class="startup-cta-strip reveal">
+        <div>
+          <h3>Join the next cohort.</h3>
+          <p>Applications are open for XR Development, Industrial Design, and Blockchain Development.</p>
+        </div>
+        <a href="index.html#about" class="btn-primary">Apply Now</a>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/images/logo-light.png" alt="School of Future Nexus" />
+          <p>Shaping Lives. Empowering Communities.<br/>A flagship institute of Centurion University, Odisha.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Domains</h5>
+          <ul>
+            <li><a href="domain-xr.html">XR Development</a></li>
+            <li><a href="domain-industrial.html">Industrial Design</a></li>
+            <li><a href="domain-blockchain.html">Blockchain Dev</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Institute</h5>
+          <ul>
+            <li><a href="about.html">About IFN</a></li>
+            <li><a href="about.html">Mission &amp; Vision</a></li>
+            <li><a href="facilities.html">Facilities</a></li>
+            <li><a href="index.html#team">Our Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="#">Twitter / X</a></li>
+            <li><a href="https://www.linkedin.com/company/cu-ifn/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="mailto:ifn@cutm.ac.in">ifn@cutm.ac.in</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 School of Future Nexus, Centurion University. All rights reserved.</span>
+        <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
