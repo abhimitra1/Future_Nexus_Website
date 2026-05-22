@@ -786,7 +786,6 @@ a  { text-decoration: none; color: inherit; }
   box-shadow: var(--glass-shadow);
   position: relative;
   transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-  overflow: hidden;
 }
 .stat-item::after {
   content: '';
@@ -2063,4 +2062,6 @@ a  { text-decoration: none; color: inherit; }
   .lab-gallery-grid   { grid-template-columns: 1fr; }
   .team-grid          { grid-template-columns: 1fr 1fr; }
   .stats-grid         { grid-template-columns: 1fr 1fr; }
+  .stat-item          { padding: 1.5rem 0.75rem; }
+  .stat-number        { font-size: 1.9rem; }
 }
