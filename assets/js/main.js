@@ -8,6 +8,58 @@ window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 60);
 });
 
+/* ── Accessible mobile navigation ───────────────────── */
+const hamburger = document.getElementById('hamburger');
+const navLinks = navbar?.querySelector('.nav-links');
+
+if (hamburger && navLinks) {
+  hamburger.setAttribute('role', 'button');
+  hamburger.setAttribute('tabindex', '0');
+  hamburger.setAttribute('aria-expanded', 'false');
+  hamburger.setAttribute('aria-controls', 'primary-navigation');
+  navLinks.id = 'primary-navigation';
+
+  const setMenu = (open) => {
+    hamburger.classList.toggle('open', open);
+    navLinks.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('nav-open', open);
+  };
+
+  const toggleMenu = () => setMenu(!navLinks.classList.contains('open'));
+  hamburger.addEventListener('click', toggleMenu);
+  hamburger.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleMenu();
+    }
+  });
+
+  navLinks.querySelectorAll('.has-dropdown > a').forEach((trigger) => {
+    trigger.addEventListener('click', (event) => {
+      if (window.innerWidth > 768) return;
+      const item = trigger.parentElement;
+      if (!item.classList.contains('expanded')) {
+        event.preventDefault();
+        navLinks.querySelectorAll('.has-dropdown.expanded').forEach((openItem) => {
+          if (openItem !== item) openItem.classList.remove('expanded');
+        });
+        item.classList.add('expanded');
+      }
+    });
+  });
+
+  navLinks.addEventListener('click', (event) => {
+    if (window.innerWidth <= 768 && event.target.closest('.nav-dropdown a')) setMenu(false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMenu(false);
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) setMenu(false);
+  });
+}
+
 /* ── Scroll reveal ───────────────────────────────────── */
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
